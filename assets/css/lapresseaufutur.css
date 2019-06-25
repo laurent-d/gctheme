@@ -768,7 +768,7 @@ html[data-menu=hammenufull] #copyright {
 
 h2.ppb_title {
     font-size: 36px;
-    text-transform: none;
+    text-transform: uppercase;
 }
 
 .ppb_title {
