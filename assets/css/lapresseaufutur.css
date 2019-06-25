@@ -1,4 +1,8 @@
-body,
+body textarea {
+    font-family: "ltc-bodoni-175","Bodoni MT", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+    font-size: 18px;
+}
+
 input[type=text],
 input[type=password],
 input[type=email],
@@ -12,7 +16,8 @@ input.wpcf7-text,
 .woocommerce-page #content table.cart td.actions .coupon .input-text,
 select,
 textarea {
-    font-family: "ltc-bodoni-175","Bodoni MT", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-size: 15px;
 }
 
 body,
@@ -30,7 +35,7 @@ input.wpcf7-text,
 select,
 input[type=submit],
 input[type=button] {
-    font-size: 18px;
+    /* font-size: 18px; */
 }
 
 a.button,
