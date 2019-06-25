@@ -29,10 +29,13 @@ input.wpcf7-text,
 .woocommerce-page #content table.cart td.actions .coupon .input-text,
 select,
 input[type=submit],
-input[type=button],
+input[type=button] {
+    font-size: 18px;
+}
+
 a.button,
 .button {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 h1,
