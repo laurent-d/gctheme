@@ -11,7 +11,7 @@ jQuery.fn.setNav = function(){
 	if(calScreenWidth >= 960)
 	{
 
-		jQuery('#menu_wrapper .nav li.menu-item, .dropdown').hover(function()
+		jQuery('#menu_wrapper .nav li.menu-item, li.menu-item.dp').hover(function()
 		{
 			jQuery(this).children('ul:first').addClass('visible');
 			jQuery(this).children('ul:first').addClass('hover');
@@ -22,7 +22,7 @@ jQuery.fn.setNav = function(){
 			jQuery(this).children('ul:first').removeClass('hover');
 		});
 
-		jQuery('#menu_wrapper .nav li.menu-item, .dropdown').children('ul:first.hover').hover(function()
+		jQuery('#menu_wrapper .nav li.menu-item, li.menu-item.dp').children('ul:first.hover').hover(function()
 		{
 			jQuery(this).stop().addClass('visible');
 		},
