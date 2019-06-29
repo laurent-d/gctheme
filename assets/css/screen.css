@@ -7257,7 +7257,7 @@ body.single-speaker #page_caption .speaker_website
 
 .clock_bg .clock_counter
 {
-	font-weight: 600;
+	/* font-weight: 600; */
 	font-size: 70px;
 	line-height: 0.8;
 	letter-spacing: 0px;

@@ -254,7 +254,7 @@ $(function () {
         description: $('[data-event-description]').attr('data-event-description')
       }
     });
-    $('body').append(myCalendar);
+    $('.add-calendar').append(myCalendar);
   }
 
   // Photo gallery section
