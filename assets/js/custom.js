@@ -370,14 +370,13 @@ jQuery(document).ready(function(){
 
 			if(windowWidth >= 960)
 			{
-				jQuery(this).waypoint(function(direction) {
+				jQuery(this).waypoint(function (direction) {
 					var animationClass = jQuery(this).data('animation');
 
 					jQuery(this).addClass(animationClass, direction === 'down');
 
-				}
-					//, { offset: '100%' })
-					;
+				});
+					//, { offset: '100%' });
 			}
 		});
 	});
