@@ -370,7 +370,7 @@ jQuery(document).ready(function(){
 
 			if(windowWidth >= 960)
 			{
-				jQuery(this)[0].waypoint(function(direction) {
+				jQuery(this).waypoint(function(direction) {
 					var animationClass = jQuery(this).data('animation');
 
 					jQuery(this).addClass(animationClass, direction === 'down');
