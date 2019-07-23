@@ -375,7 +375,9 @@ jQuery(document).ready(function(){
 
 					jQuery(this).addClass(animationClass, direction === 'down');
 
-				} , { offset: '100%' });
+				}
+					//, { offset: '100%' })
+					;
 			}
 		});
 	});
