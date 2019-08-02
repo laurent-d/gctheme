@@ -364,7 +364,7 @@ jQuery(document).ready(function(){
 	});
 
 	jQuery('.animated').each(function () {
-		console.log("bip waypoint");
+		//console.log("bip waypoint");
 		jQuery(this).imagesLoaded(function() {
 			var windowWidth = jQuery(window).width();
 
