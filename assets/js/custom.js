@@ -58,7 +58,7 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	jQuery(document).setiLightbox();
+	// jQuery(document).setiLightbox();
 
     jQuery('#menu_expand_wrapper a').on( 'click', function(){
     	jQuery('#menu_wrapper').fadeIn();
@@ -293,22 +293,22 @@ jQuery(document).ready(function(){
         progressContent.css({'width': progressWidth+'%'});
 	} , { offset: '100%' });
 
-	jQuery('.tooltip').tooltipster();
-	jQuery('.demotip').tooltipster({
-		position: 'left'
-	});
+	// jQuery('.tooltip').tooltipster();
+	// jQuery('.demotip').tooltipster({
+	// 	position: 'left'
+	// });
 
-	jQuery('.portfolio_prev_next_link').each(function(){
-		jQuery(this).tooltipster({
-			content: jQuery('<img src="'+jQuery(this).attr('data-img')+'" /><br/><div style="text-align:center;margin:7px 0 5px 0;"><strong>'+jQuery(this).attr('data-title')+'</strong></div>')
-		});
-	});
+	// jQuery('.portfolio_prev_next_link').each(function(){
+	// 	jQuery(this).tooltipster({
+	// 		content: jQuery('<img src="'+jQuery(this).attr('data-img')+'" /><br/><div style="text-align:center;margin:7px 0 5px 0;"><strong>'+jQuery(this).attr('data-title')+'</strong></div>')
+	// 	});
+	// });
 
-	jQuery('.post_prev_next_link').each(function(){
-		jQuery(this).tooltipster({
-			content: jQuery('<img src="'+jQuery(this).attr('data-img')+'" />')
-		});
-	});
+	// jQuery('.post_prev_next_link').each(function(){
+	// 	jQuery(this).tooltipster({
+	// 		content: jQuery('<img src="'+jQuery(this).attr('data-img')+'" />')
+	// 	});
+	// });
 
 	jQuery('.post_share').on( 'click', function() {
 		var targetShareID = jQuery(this).attr('data-share');
