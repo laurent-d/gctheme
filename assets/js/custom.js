@@ -387,20 +387,20 @@ jQuery(document).ready(function(){
 	var masonry = jQuery('.gallery_mansory_wrapper');
 
 	// initialize masonry
-	masonry.imagesLoaded(function(){
+	// masonry.imagesLoaded(function(){
 
-	    masonry.masonry({
-	    	itemSelector: '.mansory_thumbnail',
-	    	isResizable: true,
-	    	isAnimated: true,
-	    	isFitWidth: true,
-	    	columnWidth:Math.floor((masonry.width()/ cols))
-	      });
+	//     masonry.masonry({
+	//     	itemSelector: '.mansory_thumbnail',
+	//     	isResizable: true,
+	//     	isAnimated: true,
+	//     	isFitWidth: true,
+	//     	columnWidth:Math.floor((masonry.width()/ cols))
+	//       });
 
-	     masonry.children('.mansory_thumbnail').children('.gallery_type').each(function(){
-		    jQuery(this).addClass('fade-in');
-	    });
-	});
+	//      masonry.children('.mansory_thumbnail').children('.gallery_type').each(function(){
+	// 	    jQuery(this).addClass('fade-in');
+	//     });
+	// });
 
 	if(jQuery.browser.msie && parseFloat(jQuery.browser.version)<10)
 	{
