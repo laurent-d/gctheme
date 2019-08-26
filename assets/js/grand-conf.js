@@ -68,8 +68,8 @@ inView('.toReveal').on('enter', function (chartSection) {
     function checkWrap(carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
         console.log(container);
     // if sum(carousel-cell width) > carousel width then wrap else not
-    const carousel = container.querySelector(carouselSelector);
-    const cells = container.querySelectorAll(cellSelector);
+    const carousel = document.querySelector(carouselSelector);
+    const cells = document.querySelectorAll(cellSelector);
 
     if (carousel && cells) {
       let cellsTotalWidth = 0;
