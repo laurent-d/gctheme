@@ -5,6 +5,8 @@ GRAND CONFERENCE ADD-ON F(X)
 /* Charts-columns */
 lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () { console.log("lazyload inview charts") });
 
+
+console.log(window.NUMBER_TYPE);
 class getCounter {
     constructor(startCount, endCount, timer, html) {
       this.startCount = startCount;
