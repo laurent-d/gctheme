@@ -58,7 +58,7 @@ class getCounter {
 lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
         console.log("in-view loaded for charts colulmns");
         inView.offset(200);
-        inView('.charts-columns.toReveal').on('enter', function (chartSection) {
+        inView('.toReveal').on('enter', function (chartSection) {
             chartsreveal(chartSection);
             chartSection.classList.remove("toReveal");
             console.log(this);
