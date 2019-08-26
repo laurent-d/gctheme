@@ -65,10 +65,11 @@ inView('.toReveal').on('enter', function (chartSection) {
 /* Charts-columns */
 
 /* Slideshow */
-function checkWrap(carouselSelector, cellSelector) {
+    function checkWrap(container, carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
+        console.log(container);
     // if sum(carousel-cell width) > carousel width then wrap else not
-    const carousel = document.querySelector(carouselSelector);
-    const cells = carousel.querySelectorAll(cellSelector);
+    const carousel = container.querySelector(carouselSelector);
+    const cells = container.querySelectorAll(cellSelector);
 
     if (carousel && cells) {
       let cellsTotalWidth = 0;
@@ -115,8 +116,8 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
 
         const flktyOptions = {
           // options
-          wrapAround: checkWrap(carouselSelector,cellSelector),
-          autoPlay: checkWrap(carouselSelector,cellSelector),
+          wrapAround: checkWrap(container),
+          autoPlay: checkWrap(container),
           cellAlign: 'center',
           contain: true,
           prevNextButtons: false,
