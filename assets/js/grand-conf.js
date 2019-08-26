@@ -103,7 +103,15 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
     pageDots: false
   };
 
-  let flkty = new Flickity(flktySelector, flktyOptions);
+  var carouselContainers = document.querySelectorAll('.slideshow_enabled');
+
+    for ( var i=0; i < carouselContainers.length; i++ ) {
+    var container = carouselContainers[i];
+        initCarouselContainer(container);
+        let flkty = new Flickity(container, flktyOptions);
+    }
+
+  //let flkty = new Flickity(flktySelector, flktyOptions);
 
   window.addEventListener('resize', (ev) => {
     if ('destroy' in flkty) {
