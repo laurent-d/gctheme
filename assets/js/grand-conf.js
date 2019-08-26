@@ -55,11 +55,13 @@ class getCounter {
 
 
 lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
-    console.log("in-view loaded for charts colulmns");
-    inView.offset(200);
-    inView('.charts-columns').on('enter', function (chartSection) {
-      chartsreveal(chartSection);
-    });
+    window.addEventListener("DOMContentLoaded", function (event) {
+        console.log("in-view loaded for charts colulmns");
+        inView.offset(200);
+        inView('.charts-columns').on('enter', function (chartSection) {
+         chartsreveal(chartSection);
+        });
+      });
  });
 
 
