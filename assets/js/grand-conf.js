@@ -116,8 +116,8 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
 
         const flktyOptions = {
           // options
-          wrapAround: checkWrap(container),
-          autoPlay: checkWrap(container),
+          wrapAround: checkWrap(carouselContainers[i]),
+          autoPlay: checkWrap(carouselContainers[i]),
           cellAlign: 'center',
           contain: true,
           prevNextButtons: false,
@@ -125,7 +125,7 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
           pageDots: false
         };
 
-    let flkty = new Flickity(container, flktyOptions);
+    let flkty = new Flickity(carouselContainers[i], flktyOptions);
     }
 
   //let flkty = new Flickity(flktySelector, flktyOptions);
