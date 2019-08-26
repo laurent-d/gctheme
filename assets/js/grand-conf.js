@@ -2,6 +2,8 @@
 GRAND CONFERENCE ADD-ON F(X)
 */
 
+
+/* Charts-columns */
 class getCounter {
     constructor(startCount, endCount, timer, html) {
       this.startCount = startCount;
@@ -51,9 +53,9 @@ class getCounter {
   }
 
 
-/* Charts-columns */
-lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
 
-});
+lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
+    console.log("in-view loaded for charts colulmns");
+ });
 
 
