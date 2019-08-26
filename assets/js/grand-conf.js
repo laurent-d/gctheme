@@ -65,7 +65,7 @@ inView('.toReveal').on('enter', function (chartSection) {
 /* Charts-columns */
 
 /* Slideshow */
-function checkWrap(carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
+function checkWrap(carouselSelector, cellSelector) {
     // if sum(carousel-cell width) > carousel width then wrap else not
     const carousel = document.querySelector(carouselSelector);
     const cells = carousel.querySelectorAll(cellSelector);
@@ -89,24 +89,41 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
     console.log("flickity loaded");
 
 
-  const flktySelector = '.slideshow_enabled';
-  //const cellSelector = '.images-list-item';
+//   const flktySelector = '.slideshow_enabled';
+//   //const cellSelector = '.images-list-item';
 
-  const flktyOptions = {
-    // options
-    wrapAround: checkWrap(),
-    autoPlay: checkWrap(),
-    cellAlign: 'center',
-    contain: true,
-    prevNextButtons: false,
-      // Disable previous & next buttons
-    pageDots: false
-  };
+//   const flktyOptions = {
+//     // options
+//     wrapAround: checkWrap(),
+//     autoPlay: checkWrap(),
+//     cellAlign: 'center',
+//     contain: true,
+//     prevNextButtons: false,
+//       // Disable previous & next buttons
+//     pageDots: false
+//   };
 
   var carouselContainers = document.querySelectorAll('.slideshow_enabled');
 
     for ( var i=0; i < carouselContainers.length; i++ ) {
-    var container = carouselContainers[i];
+        var container = carouselContainers[i];
+        var carouselSelector = container.querySelector('.slideshow_enabled');
+        var cellSelector = container.querySelector('.images-list-item');
+
+        const flktySelector = '.slideshow_enabled';
+        //const cellSelector = '.images-list-item';
+
+        const flktyOptions = {
+          // options
+          wrapAround: checkWrap(carouselSelector,cellSelector),
+          autoPlay: checkWrap(carouselSelector,cellSelector),
+          cellAlign: 'center',
+          contain: true,
+          prevNextButtons: false,
+            // Disable previous & next buttons
+          pageDots: false
+        };
+
     let flkty = new Flickity(container, flktyOptions);
     }
 
