@@ -65,14 +65,14 @@ inView('.toReveal').on('enter', function (chartSection) {
 /* Charts-columns */
 
 /* Slideshow */
-    function checkWrap(carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
-    //console.log(container);
+    function checkWrap(container, carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
+    console.log(container);
     // if sum(carousel-cell width) > carousel width then wrap else not
-    const carousel = document.querySelector(carouselSelector);
-    const cells = document.querySelectorAll(cellSelector);
+    var carousel = container.querySelector(carouselSelector);
+    var cells = container.querySelectorAll(cellSelector);
 
     if (carousel && cells) {
-      let cellsTotalWidth = 0;
+      var cellsTotalWidth = 0;
       cells.forEach((cell) => {
         const style = window.getComputedStyle(cell);
         cellsTotalWidth += parseFloat(style.width) +
@@ -111,13 +111,13 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
     for ( var i=0; i < carouselContainers.length; i++ ) {
         var container = carouselContainers[i];
 
-        const flktySelector = '.slideshow_enabled';
+        var flktySelector = '.slideshow_enabled';
         //const cellSelector = '.images-list-item';
 
-        const flktyOptions = {
+        var flktyOptions = {
           // options
-          wrapAround: checkWrap(),
-          autoPlay: checkWrap(),
+          wrapAround: checkWrap(container),
+          autoPlay: checkWrap(container),
           cellAlign: 'center',
           contain: true,
           prevNextButtons: false,
@@ -125,7 +125,7 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
           pageDots: false
         };
 
-    let flkty = new Flickity(carouselContainers[i], flktyOptions);
+    var flkty = new Flickity(carouselContainers[i], flktyOptions);
     }
 
   //let flkty = new Flickity(flktySelector, flktyOptions);
