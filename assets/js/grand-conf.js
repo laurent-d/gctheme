@@ -133,8 +133,8 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
   window.addEventListener('resize', (ev) => {
     if ('destroy' in flkty) {
       flkty.destroy();
-      flktyOptions.wrapAround = checkWrap();
-      flktyOptions.autoPlay = checkWrap();
+      flktyOptions.wrapAround = checkWrap(container);
+      flktyOptions.autoPlay = checkWrap(container);
       flkty = new Flickity(flktySelector, flktyOptions);
     }
   });
