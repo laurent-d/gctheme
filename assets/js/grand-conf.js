@@ -79,9 +79,11 @@ inView('.toReveal').on('enter', function (chartSection) {
             parseFloat(style.marginRight) +
             parseFloat(style.marginLeft);
       });
-      const carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
+        const carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
+        console.log("0");
       return cellsTotalWidth > carouselWidth;
     }
+    console.log("1");
     return false;
 }
 
@@ -108,8 +110,6 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
 
     for ( var i=0; i < carouselContainers.length; i++ ) {
         var container = carouselContainers[i];
-        var carouselSelector = container.querySelector('.slideshow_enabled');
-        var cellSelector = container.querySelector('.images-list-item');
 
         const flktySelector = '.slideshow_enabled';
         //const cellSelector = '.images-list-item';
