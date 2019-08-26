@@ -65,21 +65,21 @@ inView('.toReveal').on('enter', function (chartSection) {
 /* Charts-columns */
 
 /* Slideshow */
-    function checkWrap(container, carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
-    console.log(container);
+    function checkWrap(carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
+    //console.log(container);
     // if sum(carousel-cell width) > carousel width then wrap else not
-    var carousel = container.querySelector(carouselSelector);
-    var cells = container.querySelectorAll(cellSelector);
+    var carousel = document.querySelector(carouselSelector);
+    var cells = document.querySelectorAll(cellSelector);
 
     if (carousel && cells) {
       var cellsTotalWidth = 0;
       cells.forEach((cell) => {
-        const style = window.getComputedStyle(cell);
+        var style = window.getComputedStyle(cell);
         cellsTotalWidth += parseFloat(style.width) +
             parseFloat(style.marginRight) +
             parseFloat(style.marginLeft);
       });
-        const carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
+        var carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
         console.log("0");
       return cellsTotalWidth > carouselWidth;
     }
@@ -116,8 +116,8 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
 
         var flktyOptions = {
           // options
-          wrapAround: checkWrap(container),
-          autoPlay: checkWrap(container),
+          wrapAround: checkWrap(),
+          autoPlay: checkWrap(),
           cellAlign: 'center',
           contain: true,
           prevNextButtons: false,
@@ -125,7 +125,7 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-
           pageDots: false
         };
 
-    var flkty = new Flickity(carouselContainers[i], flktyOptions);
+    var flkty = new Flickity(container, flktyOptions);
     }
 
   //let flkty = new Flickity(flktySelector, flktyOptions);
