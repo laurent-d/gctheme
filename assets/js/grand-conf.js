@@ -94,6 +94,7 @@ function initFlkty() {
     var needWrap = checkWrap(container);
     var flktyOptions = {
       // options
+      imagesLoaded: true,
       wrapAround: needWrap,
       autoPlay: needWrap,
       cellAlign: "center",
