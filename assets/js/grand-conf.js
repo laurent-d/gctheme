@@ -122,6 +122,14 @@ lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js","[data-s
 
 /* Slideshow */
 
+/* Synoptique */
+lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']", function() {console.log("lazyload session synoptique")});
+/* Synoptique */
+
+/* FAQ */
+lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/accordion.min.js", "[data-section-type='faq']", function() {console.log("lazyload faq")});
+/* FAQ */
+
 });
 
 
