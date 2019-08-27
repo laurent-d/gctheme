@@ -65,82 +65,90 @@ inView('.toReveal').on('enter', function (chartSection) {
 /* Charts-columns */
 
 /* Slideshow */
-    function checkWrap(carouselSelector = '.slideshow_enabled', cellSelector = '.images-list-item') {
-    //console.log(container);
-    // if sum(carousel-cell width) > carousel width then wrap else not
-    var carousel = document.querySelector(carouselSelector);
-    var cells = document.querySelectorAll(cellSelector);
+function checkWrap(container) {
+  var carouselSelector = ".slideshow_enabled",
+    cellSelector = ".images-list-item";
+  console.log(container);
+  // if sum(carousel-cell width) > carousel width then wrap else not
+  var carousel = container;
+  var cells = container.querySelectorAll(cellSelector);
 
-    if (carousel && cells) {
-      var cellsTotalWidth = 0;
-      cells.forEach((cell) => {
-        var style = window.getComputedStyle(cell);
-        cellsTotalWidth += parseFloat(style.width) +
-            parseFloat(style.marginRight) +
-            parseFloat(style.marginLeft);
-      });
-        var carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
-        console.log("0");
-      return cellsTotalWidth > carouselWidth;
-    }
-    console.log("1");
-    return false;
+  if (carousel && cells) {
+    var cellsTotalWidth = 0;
+    cells.forEach(cell => {
+      var style = window.getComputedStyle(cell);
+      cellsTotalWidth +=
+        parseFloat(style.width) +
+        parseFloat(style.marginRight) +
+        parseFloat(style.marginLeft);
+    });
+    var carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
+    console.log(cellsTotalWidth > carouselWidth);
+    return cellsTotalWidth > carouselWidth;
+  }
+  console.log("1");
+  return false;
 }
 
-lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css", "[data-section-type='images-list']");
-lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js", "[data-section-type='images-list']", function () {
+lazyLoadStylesheet(
+  "https://unpkg.com/flickity@2/dist/flickity.min.css",
+  "[data-section-type='images-list']"
+);
+lazyLoadScript(
+  "https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js",
+  "[data-section-type='images-list']",
+  function() {
     console.log("flickity loaded");
 
+    //   const flktySelector = '.slideshow_enabled';
+    //   //const cellSelector = '.images-list-item';
 
-//   const flktySelector = '.slideshow_enabled';
-//   //const cellSelector = '.images-list-item';
+    //   const flktyOptions = {
+    //     // options
+    //     wrapAround: checkWrap(),
+    //     autoPlay: checkWrap(),
+    //     cellAlign: 'center',
+    //     contain: true,
+    //     prevNextButtons: false,
+    //       // Disable previous & next buttons
+    //     pageDots: false
+    //   };
 
-//   const flktyOptions = {
-//     // options
-//     wrapAround: checkWrap(),
-//     autoPlay: checkWrap(),
-//     cellAlign: 'center',
-//     contain: true,
-//     prevNextButtons: false,
-//       // Disable previous & next buttons
-//     pageDots: false
-//   };
+    var carouselContainers = document.querySelectorAll(".slideshow_enabled");
 
-  var carouselContainers = document.querySelectorAll('.slideshow_enabled');
+    for (var i = 0; i < carouselContainers.length; i++) {
+      var container = carouselContainers[i];
 
-    for ( var i=0; i < carouselContainers.length; i++ ) {
-        var container = carouselContainers[i];
+      var flktySelector = ".slideshow_enabled";
+      //const cellSelector = '.images-list-item';
+      var needWrap = checkWrap(container);
 
-        var flktySelector = '.slideshow_enabled';
-        //const cellSelector = '.images-list-item';
+      var flktyOptions = {
+        // options
+        wrapAround: needWrap,
+        autoPlay: needWrap,
+        cellAlign: "center",
+        contain: true,
+        prevNextButtons: false,
+        // Disable previous & next buttons
+        pageDots: false
+      };
 
-        var flktyOptions = {
-          // options
-          wrapAround: checkWrap(),
-          autoPlay: checkWrap(),
-          cellAlign: 'center',
-          contain: true,
-          prevNextButtons: false,
-            // Disable previous & next buttons
-          pageDots: false
-        };
-
-    var flkty = new Flickity(container, flktyOptions);
+      var flkty = new Flickity(container, flktyOptions);
     }
 
-  //let flkty = new Flickity(flktySelector, flktyOptions);
+    //let flkty = new Flickity(flktySelector, flktyOptions);
 
-  window.addEventListener('resize', (ev) => {
-    if ('destroy' in flkty) {
-      flkty.destroy();
-      flktyOptions.wrapAround = checkWrap(container);
-      flktyOptions.autoPlay = checkWrap(container);
-      flkty = new Flickity(flktySelector, flktyOptions);
-    }
-  });
-
-
-});
+    window.addEventListener("resize", ev => {
+      if ("destroy" in flkty) {
+        flkty.destroy();
+        flktyOptions.wrapAround = checkWrap(container);
+        flktyOptions.autoPlay = checkWrap(container);
+        flkty = new Flickity(flktySelector, flktyOptions);
+      }
+    });
+  }
+);
 
 
 /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
