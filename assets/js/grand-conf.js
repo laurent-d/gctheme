@@ -68,11 +68,9 @@ inView('.toReveal').on('enter', function (chartSection) {
 function checkWrap(container) {
   var carouselSelector = ".slideshow_enabled",
     cellSelector = ".images-list-item";
-  console.log(container);
   // if sum(carousel-cell width) > carousel width then wrap else not
   var carousel = container;
   var cells = container.querySelectorAll(cellSelector);
-
   if (carousel && cells) {
     var cellsTotalWidth = 0;
     cells.forEach(cell => {
@@ -83,70 +81,36 @@ function checkWrap(container) {
         parseFloat(style.marginLeft);
     });
     var carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
-    console.log(cellsTotalWidth > carouselWidth);
     return cellsTotalWidth > carouselWidth;
   }
-  console.log("1");
   return false;
 }
 
-lazyLoadStylesheet(
-  "https://unpkg.com/flickity@2/dist/flickity.min.css",
-  "[data-section-type='images-list']"
-);
-lazyLoadScript(
-  "https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js",
-  "[data-section-type='images-list']",
-  function() {
-    console.log("flickity loaded");
+function initFlkty() {
+  var carouselContainers = document.querySelectorAll(".slideshow_enabled");
+  for (var i = 0; i < carouselContainers.length; i++) {
+    var container = carouselContainers[i];
+    //const cellSelector = '.images-list-item';
+    var needWrap = checkWrap(container);
+    var flktyOptions = {
+      // options
+      wrapAround: needWrap,
+      autoPlay: needWrap,
+      cellAlign: "center",
+      contain: true,
+      prevNextButtons: false,
+      pageDots: false
+    };
+    var flkty = new Flickity(container, flktyOptions);
+  }
+}
 
-    //   const flktySelector = '.slideshow_enabled';
-    //   //const cellSelector = '.images-list-item';
-
-    //   const flktyOptions = {
-    //     // options
-    //     wrapAround: checkWrap(),
-    //     autoPlay: checkWrap(),
-    //     cellAlign: 'center',
-    //     contain: true,
-    //     prevNextButtons: false,
-    //       // Disable previous & next buttons
-    //     pageDots: false
-    //   };
-
-    var carouselContainers = document.querySelectorAll(".slideshow_enabled");
-    for (var i = 0; i < carouselContainers.length; i++) {
-      var container = carouselContainers[i];
-      //const cellSelector = '.images-list-item';
-      var needWrap = checkWrap(container);
-      var flktyOptions = {
-        // options
-        wrapAround: needWrap,
-        autoPlay: needWrap,
-        cellAlign: "center",
-        contain: true,
-        prevNextButtons: false,
-        // Disable previous & next buttons
-        pageDots: false
-      };
-      var flkty = new Flickity(container, flktyOptions);
-    }
-
-    //let flkty = new Flickity(flktySelector, flktyOptions);
-
-    window.addEventListener("resize", ev => {
-      var carouselContainers = document.querySelectorAll(".slideshow_enabled");
-      for (var i = 0; i < carouselContainers.length; i++) {
-        var container = carouselContainers[i];
-        var needWrap = checkWrap(container);
-        if ("destroy" in flkty) {
-          flkty.destroy();
-          flktyOptions.wrapAround = needWrap;
-          flktyOptions.autoPlay = needWrap;
-          flkty = new Flickity(container, flktyOptions);
-        }
-
-      }
+lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css","[data-section-type='images-list']");
+lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js","[data-section-type='images-list']",
+  function () {
+    initFlkty();
+    window.addEventListener("resize", function () {
+      initFlkty();
     });
   }
 );
