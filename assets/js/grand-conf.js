@@ -159,6 +159,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     extendMap();
 
     jQuery(".map_shortcode_wrapper").simplegmaps({
+      debug: true,
       MapOptions: {
         zoom: 14,
         scrollwheel: false,
