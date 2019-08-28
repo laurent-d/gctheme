@@ -141,7 +141,7 @@ lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.j
     console.log("lazyload map");
 
     function extendMap(elem) {
-      if ( el.height() > elem.siblings('.standard_wrapper').height()  ) {
+      if ( elem.height() > elem.siblings('.standard_wrapper').height()  ) {
     } else {
       var extended = elem.siblings('.standard_wrapper').height() + 60;
       //console.log (extended)
@@ -410,6 +410,3 @@ lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.j
 
   });
 });
-
-
-
