@@ -130,6 +130,18 @@ lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section
 lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/accordion.min.js", "[data-section-type='faq']", function() {console.log("lazyload faq")});
 /* FAQ */
 
+/* Countdown // Image overlay */
+lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.js", ".countdown", function () {
+  console.log("lazyload countdown")
+});
+/* Countdown // Image overlay */
+
+/* MAP */
+  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.simplegmaps.min.js", "[data-section-type='map']", function () {
+    console.log("lazyload map")
+  });
+/* MAP */
+
 });
 
 
