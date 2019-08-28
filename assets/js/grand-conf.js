@@ -139,35 +139,26 @@ lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.j
 /* MAP */
   lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.simplegmaps.min.js", "[data-section-type='map']", function () {
     console.log("lazyload map");
-
-    function extendMap(elem) {
-      if ( elem.height() > elem.siblings('.standard_wrapper').height()  ) {
+    function extendMap() {
+      if ( jQuery(".map_shortcode_wrapper").height() > jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height()  ) {
     } else {
-      var extended = elem.siblings('.standard_wrapper').height() + 60;
+      var extended = jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height() + 60;
       //console.log (extended)
-      elem.height(extended);
+      jQuery(".map_shortcode_wrapper").height(extended);
     };
     }
 
-    window.addEventListener("DOMContentLoaded", function (event) {
-
-
-
+window.addEventListener("DOMContentLoaded", function (event) {
   jQuery( window ).resize(function() {
   extendMap();
   });
 
 
-      jQuery(document).ready(function () {
+  jQuery(document).ready(function () {
 
-        var mapContainers = document.querySelectorAll(".map-section");
-        for (var i = 0; i < mapContainers.length; i++) {
-          var mapElem = mapContainers[i];
+    extendMap();
 
-
-
-    extendMap(mapElem);
-    mapElem.simplegmaps({
+    jQuery(".map_shortcode_wrapper").simplegmaps({
       MapOptions: {
         zoom: 14,
         scrollwheel: false,
@@ -401,12 +392,10 @@ lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.j
       }
     });
 
-  };
+  });
 });
-
 
   });
 /* MAP */
 
   });
-});
