@@ -401,13 +401,14 @@ lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.j
       }
     });
 
-  });
+  };
 });
 
 
   });
 /* MAP */
 
+  });
 });
 
 
