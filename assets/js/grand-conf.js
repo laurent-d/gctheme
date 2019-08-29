@@ -430,7 +430,6 @@ jQuery(document).ready(function () {
     }
   });
 });
-
 /* COUNTDOWN */
 
 });
