@@ -92,12 +92,13 @@ function initFlkty() {
     var container = carouselContainers[i];
     //const cellSelector = '.images-list-item';
     var needWrap = checkWrap(container);
+    if (needWrap) { var alignCell = "left"; } else { var alignCell = "center"; }
     var flktyOptions = {
       // options
       imagesLoaded: true,
       wrapAround: needWrap,
       autoPlay: needWrap,
-      cellAlign: "center",
+      cellAlign: alignCell,
       contain: true,
       prevNextButtons: false,
       pageDots: false
@@ -132,26 +133,23 @@ lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/accordion.min.js",
 
 /* Countdown // Image overlay */
 lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.js", ".countdown", function () {
-  console.log("lazyload countdown")
 });
 /* Countdown // Image overlay */
 
 /* MAP */
 lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.simplegmaps.min.js", "[data-section-type='map']", function () {
-  console.log("lazyload map");
   function extendMap() {
     if ( jQuery(".map_shortcode_wrapper").height() > jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height()  ) {
   } else {
     var extended = jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height() + 60;
-    //console.log (extended)
     jQuery(".map_shortcode_wrapper").height(extended);
   };
   }
 
 
-jQuery( window ).resize(function() {
-extendMap();
-});
+  jQuery( window ).resize(function() {
+    extendMap();
+  });
 
 
 jQuery(document).ready(function () {
