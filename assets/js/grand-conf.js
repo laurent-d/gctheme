@@ -44,12 +44,13 @@ var chartsreveal = function (chartSection) {
             chart.style.strokeDashoffset = getOffset(val)
             //textDisplay.textContent = `${val}%`
             var unit = "%";
+            var inc = 1;
         } else {
             var inc = (val.length > 3) ? 10 : 1;
             var unit = "";
         }
         var counter = new getCounter(0, val, 1, textDisplay);
-        counter.startCounter(1, unit);
+        counter.startCounter(inc, unit);
     }
 }
 
