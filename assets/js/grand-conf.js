@@ -29,7 +29,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   var chartsreveal = function (chartSection) {
       var NUMBER_TYPE = chartSection.dataset.chartsType;
-      console.log(NUMBER_TYPE);
       const charts = chartSection.querySelectorAll('.score');
       for (var i = 0; i < charts.length; i++) {
           var val = charts[i].querySelector('data-chart').innerHTML;
@@ -54,11 +53,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
 
   lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
-  console.log("in-view loaded for charts colulmns");
-  inView.offset(200);
-  inView('.toReveal').on('enter', function (chartSection) {
-      chartsreveal(chartSection);
-  });
+    inView.offset(200);
+    inView('.toReveal').on('enter', function (chartSection) {
+        chartsreveal(chartSection);
+    });
   });
 
   /* Charts-columns */
@@ -122,11 +120,11 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Slideshow */
 
   /* Synoptique */
-  lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']", function() {console.log("lazyload session synoptique")});
+  lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']");
   /* Synoptique */
 
   /* FAQ */
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/accordion.min.js", "[data-section-type='faq']", function() {console.log("lazyload faq")});
+  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/accordion.min.js", "[data-section-type='faq']");
   /* FAQ */
 
   /* Countdown // Image overlay */
@@ -391,9 +389,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* MAP */
 
   /* COUNTDOWN */
-    lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.js", ".countdown", function () {
-      console.log("lazyload map");
-
+  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.js", ".countdown", function () {
     var dataDate = $('.countdown').attr('data-date');
     $('.countdown').countdown(dataDate, function(event) {
       var weeks = event.offset.weeks;
@@ -427,7 +423,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* popin-offer */
   lazyLoadScript("https://cdn.jsdelivr.net/npm/body-scroll-lock@2.6.1/lib/bodyScrollLock.min.js","[data-section-type='popin-offer']",
     function () {
-      console.log("lazy popin offer");
       // Fix for scroll iframe on iOs 12 from https://stackoverflow.com/questions/52826005/workaround-for-ios-10-12-webkit-safari-chrome-iframe-focus-bug */
       document.addEventListener('touchstart', {});
         var modoffer = $('.modal-offer')[0];
