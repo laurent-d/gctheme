@@ -437,11 +437,8 @@ jQuery(document).ready(function () {
 lazyLoadScript("https://cdn.jsdelivr.net/npm/body-scroll-lock@2.6.1/lib/bodyScrollLock.min.js","[data-section-type='popin-offer']",
   function () {
     console.log("lazy popin offer");
-
     // Fix for scroll iframe on iOs 12 from https://stackoverflow.com/questions/52826005/workaround-for-ios-10-12-webkit-safari-chrome-iframe-focus-bug */
     document.addEventListener('touchstart', {});
-
-    document.addEventListener("DOMContentLoaded", function () {
       var modoffer = $('.modal-offer')[0];
       var uiclose = $('.ui_close')[0];
       var modal_content = $('.modal_content')[0];
@@ -462,11 +459,4 @@ lazyLoadScript("https://cdn.jsdelivr.net/npm/body-scroll-lock@2.6.1/lib/bodyScro
       var	body = contents.find('body');
       $("#cssID").appendTo(contents.find('head'));
     });
-
-
-    });
-  }
-);
-
-
 });
