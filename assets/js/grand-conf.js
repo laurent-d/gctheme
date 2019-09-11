@@ -87,20 +87,31 @@ window.addEventListener("DOMContentLoaded", function (event) {
     var carouselContainers = document.querySelectorAll(".slideshow_enabled");
     for (var i = 0; i < carouselContainers.length; i++) {
       var container = carouselContainers[i];
-      //const cellSelector = '.images-list-item';
+      var autoPlaySpeed = parseInt(container.getAttribute("data-autoplay-delay"), 10);
       var needWrap = checkWrap(container);
-      if (needWrap) { var alignCell = "left"; } else { var alignCell = "center"; }
+      if (needWrap) {
+        var alignCell = "left";
+        var autoPlayDelay = autoPlaySpeed;
+      } else {
+        var alignCell = "center";
+        var autoPlayDelay = false;
+      }
       var flktyOptions = {
         // options
         imagesLoaded: true,
         wrapAround: needWrap,
-        autoPlay: needWrap,
+        autoPlay: autoPlayDelay,
         cellAlign: alignCell,
         contain: true,
         prevNextButtons: false,
-        pageDots: false
+        pageDots: false,
+        on: { ready: function() {
+        container.classList.add('slideshow_ready');
+        }}
       };
-      var flkty = new Flickity(container, flktyOptions);
+      var flkty = new Flickity(container, flktyOptions, {
+
+});
     }
   }
 
@@ -124,22 +135,22 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Synoptique */
 
   /* FAQ */
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/accordion.min.js", "[data-section-type='faq']");
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conf/js/accordion.min.js", "[data-section-type='faq']");
   /* FAQ */
 
   /* Countdown // Image overlay */
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.js", ".countdown", function () {
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conf/js/jquery.countdown.js", ".countdown", function () {
   });
   /* Countdown // Image overlay */
 
   /* MAP */
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.simplegmaps.min.js", "[data-section-type='map']", function () {
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conf/js/jquery.simplegmaps.min.js", "[data-section-type='map']", function () {
     function extendMap() {
       if ( jQuery(".map_shortcode_wrapper").height() > jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height()  ) {
-    } else {
-      var extended = jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height() + 60;
-      jQuery(".map_shortcode_wrapper").height(extended);
-    };
+      } else {
+        var extended = jQuery(".map_shortcode_wrapper").siblings('.standard_wrapper').height() + 60;
+        jQuery(".map_shortcode_wrapper").height(extended);
+      };
     }
 
 
@@ -389,7 +400,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* MAP */
 
   /* COUNTDOWN */
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.countdown.js", ".countdown", function () {
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conf/js/jquery.countdown.js", ".countdown", function () {
     var dataDate = $('.countdown').attr('data-date');
     $('.countdown').countdown(dataDate, function(event) {
       var weeks = event.offset.weeks;
@@ -446,5 +457,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }
   );
   /* popin-offer */
+
+  /* REVSLIDER VIDEO */
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conf/js/revslider/extensions/revolution.extension.video.min.js","[data-overlay-mode^='video']");
+  /* REVSLIDER VIDEO */
 
 });
