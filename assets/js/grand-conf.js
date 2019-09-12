@@ -409,19 +409,19 @@ window.addEventListener("DOMContentLoaded", function (event) {
       if (event.offset.weeks > 0 && format != "dd-hh-mn-ss" ) {
         var clock = $(this).html(event.strftime(''
         + '<div class="clock_bg"><div class="clock_counter">%w</div><div class="clock_label">' + time_weeks + '</div></div>'
-        + '<div class="clock_bg"><div class="clock_counter">%d</div><div class="clock_label">' + time_days + '<</div></div>'
+        + '<div class="clock_bg"><div class="clock_counter">%d</div><div class="clock_label">' + time_days + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%H</div><div class="clock_label">' + time_hours + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%M</div><div class="clock_label">' + time_minutes + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%S</div><div class="clock_label">' + time_seconds + '</div></div>'));
       } else if (event.offset.totalDays > 0 && format == "dd-hh-mn-ss") {
         var clock = $(this).html(event.strftime(''
-        + '<div class="clock_bg"><div class="clock_counter">%D</div><div class="clock_label">' + time_days + '<</div></div>'
+        + '<div class="clock_bg"><div class="clock_counter">%D</div><div class="clock_label">' + time_days + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%H</div><div class="clock_label">' + time_hours + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%M</div><div class="clock_label">' + time_minutes + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%S</div><div class="clock_label">' + time_seconds + '</div></div>'));
       } else if (event.offset.totalDays > 0) {
         var clock = $(this).html(event.strftime(''
-        + '<div class="clock_bg"><div class="clock_counter">%d</div><div class="clock_label">' + time_days + '<</div></div>'
+        + '<div class="clock_bg"><div class="clock_counter">%d</div><div class="clock_label">' + time_days + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%H</div><div class="clock_label">' + time_hours + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%M</div><div class="clock_label">' + time_minutes + '</div></div>'
         + '<div class="clock_bg"><div class="clock_counter">%S</div><div class="clock_label">' + time_seconds + '</div></div>'));
