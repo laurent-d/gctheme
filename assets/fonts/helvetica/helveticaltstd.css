@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'HelveticaLTStdRoman';
+  src: url('helveticaneue-webfont.eot');
+  src: url('helveticaneue-webfont.eot') format('embedded-opentype'),
+       url('helveticaneue-webfont.woff') format('woff'),
+       url('helveticaneue-webfont.ttf') format('truetype'),
+       url('helveticaneue-webfont.svg#HelveticaLTStdRoman') format('svg');
+}
+
+@font-face {
+  font-family: 'HelveticaLTStdBold';
+  src: url('helveticaneue_bold-webfont.eot');
+  src: url('helveticaneue_bold-webfont.eot') format('embedded-opentype'),
+       url('helveticaneue_bold-webfont.woff') format('woff'),
+       url('helveticaneue_bold-webfont.ttf') format('truetype'),
+       url('helveticaneue_bold-webfont.svg#HelveticaLTStdBold') format('svg');
+}
