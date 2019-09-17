@@ -469,7 +469,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-  lazyLoadScript("https://cdn.jsdelivr.net/npm/body-scroll-lock@2.6.1/lib/bodyScrollLock.min.js","[data-section-type='popin-offer']",
+  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='popin-offer']",
   function () {
     /* Session-list Grand-Conférence */
     (function(){
@@ -516,7 +516,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
       $('.session-wrapper').masonry('reloadItems').masonry();
     }, 100));
 
-
     $('li .session_content_wrapper.expandable').on( 'click', function(e) {
       var targetID = $(this).attr('data-expandid');
       $('#'+targetID).toggleClass('hide');
@@ -541,7 +540,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
       grid.masonry();
       $('.session-container').toggleClass("ready");
     });
-  );
   /* Session LIST Grand Conf*/
 
 });
