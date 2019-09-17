@@ -469,9 +469,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='popin-offer']",
+  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
     function () {
-      /* Session-list Grand-Conférence */
+    /* Session-list Grand-Conférence */
+      console.log("Grandconf-loading");
       (function () {
         var originalAddClassMethod = $.fn.addClass;
         var originalRemoveClassMethod = $.fn.removeClass;
