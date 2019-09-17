@@ -470,75 +470,76 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   /* Session LIST Grand Conf*/
   lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='popin-offer']",
-  function () {
-    /* Session-list Grand-Conférence */
-    (function(){
-      var originalAddClassMethod = $.fn.addClass;
-      var originalRemoveClassMethod = $.fn.removeClass;
-      $.fn.addClass = function(){
-          var result = originalAddClassMethod.apply( this, arguments );
+    function () {
+      /* Session-list Grand-Conférence */
+      (function () {
+        var originalAddClassMethod = $.fn.addClass;
+        var originalRemoveClassMethod = $.fn.removeClass;
+        $.fn.addClass = function () {
+          var result = originalAddClassMethod.apply(this, arguments);
           $(this).trigger('classChanged');
           return result;
-      }
-      $.fn.removeClass = function(){
-          var result = originalRemoveClassMethod.apply( this, arguments );
+        }
+        $.fn.removeClass = function () {
+          var result = originalRemoveClassMethod.apply(this, arguments);
           $(this).trigger('classChanged');
           return result;
-      }
-    })();
+        }
+      })();
 
-    function debounce(callback, delay){
-      var timer;
-      return function(){
+      function debounce(callback, delay) {
+        var timer;
+        return function () {
           var args = arguments;
           var context = this;
           clearTimeout(timer);
-          timer = setTimeout(function(){
-              callback.apply(context, args);
+          timer = setTimeout(function () {
+            callback.apply(context, args);
           }, delay)
+        }
       }
-    }
 
-    var grid = $('.session-wrapper').masonry({
+      var grid = $('.session-wrapper').masonry({
         itemSelector: '.scheduleday_wrapper',
         columnWidth: '.sizer',
         gutter: 20
       });
 
-    $(".session-item").bind('classChanged', debounce(function(e){
-      $(".scheduleday_wrapper").each(function() {
-        if ( $(this).find('.session-item').length == $(this).find('.session-item.hide').length ) {
-          $(this).hide();
+      $(".session-item").bind('classChanged', debounce(function (e) {
+        $(".scheduleday_wrapper").each(function () {
+          if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          }
+        });
+        $('.session-wrapper').masonry('reloadItems').masonry();
+      }, 100));
+
+      $('li .session_content_wrapper.expandable').on('click', function (e) {
+        var targetID = $(this).attr('data-expandid');
+        $('#' + targetID).toggleClass('hide');
+        $(this).toggleClass('active');
+        $('.session-wrapper').masonry('reloadItems').masonry();
+      });
+
+      $(".filter-container .checkbox").each(function () {
+        if ($(this).find('input:checked').length > 0) {
+          $(this).addClass("active");
         } else {
           $(this).show();
         }
       });
-      $('.session-wrapper').masonry('reloadItems').masonry();
-    }, 100));
 
-    $('li .session_content_wrapper.expandable').on( 'click', function(e) {
-      var targetID = $(this).attr('data-expandid');
-      $('#'+targetID).toggleClass('hide');
-      $(this).toggleClass('active');
-      $('.session-wrapper').masonry('reloadItems').masonry();
-    });
+      $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
+        e.stopPropagation();
+        $('.session-wrapper').masonry('reloadItems').masonry();
+      });
 
-    $(".filter-container .checkbox").each(function() {
-      if ( $(this).find('input:checked').length > 0 ) {
-        $(this).addClass("active");
-      } else {
-        $(this).show();
-      }
-    });
-
-    $(".accesspoint-register, .accesspoint-unregister").click(function(e) {
-      e.stopPropagation();
-      $('.session-wrapper').masonry('reloadItems').masonry();
-    });
-
-    $(window).load(function(){
-      grid.masonry();
-      $('.session-container').toggleClass("ready");
+      $(window).load(function () {
+        grid.masonry();
+        $('.session-container').toggleClass("ready");
+      });
     });
   /* Session LIST Grand Conf*/
 
