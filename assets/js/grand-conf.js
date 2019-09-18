@@ -471,8 +471,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Session LIST Grand Conf*/
   lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
     function () {
-    /* Session-list Grand-Conférence */
-      console.log("Grandconf-loading");
       (function () {
         var originalAddClassMethod = $.fn.addClass;
         var originalRemoveClassMethod = $.fn.removeClass;
@@ -514,14 +512,14 @@ window.addEventListener("DOMContentLoaded", function (event) {
             $(this).show();
           }
         });
-        $('.session-wrapper').masonry('reloadItems').masonry();
+        grid.masonry();
       }, 100));
 
       $('li .session_content_wrapper.expandable').on('click', function (e) {
         var targetID = $(this).attr('data-expandid');
         $('#' + targetID).toggleClass('hide');
         $(this).toggleClass('active');
-        $('.session-wrapper').masonry('reloadItems').masonry();
+        grid.masonry();
       });
 
       $(".filter-container .checkbox").each(function () {
@@ -534,7 +532,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
       $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
         e.stopPropagation();
-        $('.session-wrapper').masonry('reloadItems').masonry();
+        grid.masonry();
       });
 
       $(window).load(function () {
