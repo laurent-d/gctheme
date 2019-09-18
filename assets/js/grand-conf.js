@@ -542,4 +542,31 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
   /* Session LIST Grand Conf*/
 
+  /* */
+  function extendIllustration(parent) {
+    if ( parent.siblings(".one_half_bg.parallax").height() > parent.siblings(".one_half_bg:not(.parallax)").height()  ) {
+    } else {
+      var extended = $(".one_half_bg:not(.parallax)").height() + 60;
+      parent.siblings(".one_half_bg.parallax").height(extended);
+    };
+  }
+
+
+  $(window).resize(function () {
+    $("[data-section-type='image-with-text']").each(function () {
+      extendIllustration($(this))
+      console.log( $(this) );
+    });
+    //extendIllustration();
+  });
+
+
+  $(document).ready(function () {
+    //extendIllustration();
+    $("[data-section-type='image-with-text']").each(function () {
+      extendIllustration($(this))
+      console.log( $(this) );
+    });
+  });
+
 });
