@@ -136,6 +136,25 @@ window.addEventListener("DOMContentLoaded", function (event) {
   lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']");
   lazyLoadScript("https://unpkg.com/popper.js@1", "[data-section-type='sessions-list-synoptique']");
   lazyLoadScript("https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']", function () {
+
+    if ($('.filter-container').length > 0) {
+      $(window).on('load resize', function () {
+        /* Enable fixed cart */
+        if ($(document).outerWidth() > 767 && $('.grandconf .filter-container').length != 1 ) {
+          var top_cart = 0;
+          $('.filter-container').affix({
+            offset: {
+              top: $('[data-section-type="sessions-list-synoptique"]').offset().top,
+              bottom: ($('footer').outerHeight(true) + 85)
+            }
+          });
+          //$('.filter-container').css('width', $('.filter-container').parent().width());
+        } else {
+          $('.filter-container').removeClass("affix");
+        }
+      });
+    }
+
     /* Enhance scroll with disable hover on scroll */
     var body = $('body')[0],
     timer;
