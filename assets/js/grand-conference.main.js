@@ -492,7 +492,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   });
   /* COUNTDOWN */
 
-  /* popin-offer */
+  /* POPIN-OFFER */
   lazyLoadScript("https://cdn.jsdelivr.net/npm/body-scroll-lock@2.6.1/lib/bodyScrollLock.min.js","[data-section-type='popin-offer']",
     function () {
       // Fix for scroll iframe on iOs 12 from https://stackoverflow.com/questions/52826005/workaround-for-ios-10-12-webkit-safari-chrome-iframe-focus-bug */
@@ -524,12 +524,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-
-
-
   lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
     function () {
-
       /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
       (function () {
         var originalAddClassMethod = $.fn.addClass;
@@ -546,7 +542,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       })();
 
-      /* Debounce function to avoid multiple call */
+      /* Debounce function to avoid multiple call need to be scoped */
       function debounce(callback, delay) {
         var timer;
         return function () {
@@ -567,7 +563,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
       });
 
       function sessionlistEmptyCheck() {
-        console.log("sessionlistEmptyCheck");
         $(".scheduleday_wrapper").each(function () {
           if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
             $(this).hide();
@@ -604,11 +599,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
         grid.masonry();
       });
 
-      /* Init on loaded */
-      /*$(window).load(function () {*/
-        sessionlistEmptyCheck();
-        $('.session-container').toggleClass("ready");
-      /*});*/
+      /* intit */
+      sessionlistEmptyCheck();
+      $('.session-container').toggleClass("ready");
 
     });
   /* Session LIST Grand Conf*/
