@@ -525,37 +525,39 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   /* Session LIST Grand Conf*/
 
-  /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
-  (function () {
-    var originalAddClassMethod = $.fn.addClass;
-    var originalRemoveClassMethod = $.fn.removeClass;
-    $.fn.addClass = function () {
-      var result = originalAddClassMethod.apply(this, arguments);
-      $(this).trigger('classChanged');
-      return result;
-    }
-    $.fn.removeClass = function () {
-      var result = originalRemoveClassMethod.apply(this, arguments);
-      $(this).trigger('classChanged');
-      return result;
-    }
-  })();
 
-  /* Debounce function to avoid multiple call */
-  function debounce(callback, delay) {
-    var timer;
-    return function () {
-      var args = arguments;
-      var context = this;
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        callback.apply(context, args);
-      }, delay)
-    }
-  }
 
   lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
     function () {
+
+      /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
+      (function () {
+        var originalAddClassMethod = $.fn.addClass;
+        var originalRemoveClassMethod = $.fn.removeClass;
+        $.fn.addClass = function () {
+          var result = originalAddClassMethod.apply(this, arguments);
+          $(this).trigger('classChanged');
+          return result;
+        }
+        $.fn.removeClass = function () {
+          var result = originalRemoveClassMethod.apply(this, arguments);
+          $(this).trigger('classChanged');
+          return result;
+        }
+      })();
+
+      /* Debounce function to avoid multiple call */
+      function debounce(callback, delay) {
+        var timer;
+        return function () {
+          var args = arguments;
+          var context = this;
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            callback.apply(context, args);
+          }, delay)
+        }
+      }
 
       /* set grid */
       var grid = $('.session-wrapper').masonry({
@@ -577,7 +579,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
 
       /* Check empty session on class changed */
-      $(".session-item").bind('classChanged', debounce(sessionlistEmptyCheck(), 100));
+      $(".session-item").bind('classChanged', debounce(sessionlistEmptyCheck, 100, false));
 
       /* Expand div for description */
       $('li .session_content_wrapper.expandable').on('click', function (e) {
