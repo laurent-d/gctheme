@@ -129,8 +129,13 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Slideshow */
 
 /* Synoptique */
-  lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/backdrop.css, https://unpkg.com/tippy.js@5/dist/tippy.css, https://unpkg.com/tippy.js@5.0.1/themes/light.css, https://unpkg.com/tippy.js@5.0.1/animations/shift-away-subtle.css","[data-section-type='sessions-list-synoptique']");
-  lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js, https://unpkg.com/popper.js@1, https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']", function () {
+  lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/backdrop.css", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/tippy.css", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/themes/light.css", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/animations/shift-away-subtle.css", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadScript("https://unpkg.com/popper.js@1", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadScript("https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']", function () {
     /* Enhance scroll with disable hover on scroll */
     var body = $('body')[0],
     timer;
