@@ -524,8 +524,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
     function () {
+
+      /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
       (function () {
         var originalAddClassMethod = $.fn.addClass;
         var originalRemoveClassMethod = $.fn.removeClass;
@@ -541,6 +543,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       })();
 
+      /* Debounce function to avoid multiple call */
       function debounce(callback, delay) {
         var timer;
         return function () {
@@ -553,13 +556,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       }
 
-      var grid = $('.session-wrapper').masonry({
-        itemSelector: '.scheduleday_wrapper',
-        columnWidth: '.sizer',
-        gutter: 20
-      });
-
-      $(".session-item").bind('classChanged', debounce(function (e) {
+      function sessionlistEmptyCheck() {
+        console.log("sessionlistEmptyCheck");
         $(".scheduleday_wrapper").each(function () {
           if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
             $(this).hide();
@@ -568,8 +566,19 @@ window.addEventListener("DOMContentLoaded", function (event) {
           }
         });
         grid.masonry();
-      }, 100));
+      }
 
+      /* set grid */
+      var grid = $('.session-wrapper').masonry({
+        itemSelector: '.scheduleday_wrapper',
+        columnWidth: '.sizer',
+        gutter: 20
+      });
+
+      /* Check empty session on class changed */
+      $(".session-item").bind('classChanged', debounce(sessionlistEmptyCheck(), 100));
+
+      /* Expand behaviour if needed */
       $('li .session_content_wrapper.expandable').on('click', function (e) {
         var targetID = $(this).attr('data-expandid');
         $('#' + targetID).toggleClass('hide');
@@ -577,6 +586,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         grid.masonry();
       });
 
+      /* Add active class if checked */
       $(".filter-container .checkbox").each(function () {
         if ($(this).find('input:checked').length > 0) {
           $(this).addClass("active");
@@ -585,15 +595,18 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       });
 
+      /* Avoid propagation on register unregister */
       $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
         e.stopPropagation();
         grid.masonry();
       });
 
+      /* Init on load */
       $(window).load(function () {
-        grid.masonry();
+        sessionlistEmptyCheck();
         $('.session-container').toggleClass("ready");
       });
+
     });
   /* Session LIST Grand Conf*/
 
