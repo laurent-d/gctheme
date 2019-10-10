@@ -53,12 +53,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
 
   lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
-    $('.toReveal').each(function () {
-      var chartsSection = $(this);
-      inView.offset(200);
-      inView(chartsSection).once('enter', function (chartSection) {
-      chartsreveal(chartSection);
-      });
+    inView.offset(200);
+    inView('.toReveal').once('enter', function (chartSection) {
+        chartsreveal(chartSection);
     });
   });
 
