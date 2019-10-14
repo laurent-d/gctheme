@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
     inView.offset(200);
-    inView('.toReveal').once('enter', function (chartSection) {
+    inView('.toReveal').on('enter', function (chartSection) {
         chartsreveal(chartSection);
     });
   });
@@ -156,41 +156,35 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }
 
     /* Enhance scroll with disable hover on scroll */
-    var body = $('body')[0],
-    timer;
+    var body = $('body')[0], timer;
 
     window.addEventListener('scroll', function() {
-    clearTimeout(timer);
-    if (!body.classList.contains('disable-hover')) {
-      body.classList.add('disable-hover')
-    }
-
-    timer = setTimeout(function() {
-      body.classList.remove('disable-hover')
-    }, 500);
+      clearTimeout(timer);
+      if (!body.classList.contains('disable-hover')) {
+        body.classList.add('disable-hover')
+      }
+      timer = setTimeout(function() {
+        body.classList.remove('disable-hover')
+      }, 500);
     }, false);
 
     /* init to first date  and change the behavior of the checkbox dates */
     $(".search-filter input[type=checkbox][name^=dates]").first().prop('checked',true);
-    //fake radio behavior for date
     $(".search-filter input[type=checkbox][name^=dates]").change(function() {
-    $(".search-filter input[type=checkbox][name^=dates]").prop('checked',false);
-    $(this).prop('checked',true);
+      $(".search-filter input[type=checkbox][name^=dates]").prop('checked',false);
+      $(this).prop('checked',true);
     });
 
     var item = $(".session-item");
     tippy('.session-item', {
-    animation: 'shift-away-subtle',
-    theme: 'light',
-    trigger: 'click',
-    placement: 'right',
-    interactive: true,
-    content(reference) {
-      return document.getElementById(reference.getAttribute('data-template'));
-    }
+      animation: 'shift-away-subtle',
+      theme: 'light',
+      trigger: 'click',
+      placement: 'right',
+      interactive: true,
+      content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
     });
-    }
-  );
+  });
 
   /* Synoptique */
 
@@ -492,7 +486,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   });
   /* COUNTDOWN */
 
-  /* POPIN-OFFER */
+  /* popin-offer */
   lazyLoadScript("https://cdn.jsdelivr.net/npm/body-scroll-lock@2.6.1/lib/bodyScrollLock.min.js","[data-section-type='popin-offer']",
     function () {
       // Fix for scroll iframe on iOs 12 from https://stackoverflow.com/questions/52826005/workaround-for-ios-10-12-webkit-safari-chrome-iframe-focus-bug */
@@ -524,9 +518,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
+  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
     function () {
-      /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
       (function () {
         var originalAddClassMethod = $.fn.addClass;
         var originalRemoveClassMethod = $.fn.removeClass;
@@ -542,7 +535,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       })();
 
-      /* Debounce function to avoid multiple call need to be scoped */
       function debounce(callback, delay) {
         var timer;
         return function () {
@@ -555,14 +547,13 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       }
 
-      /* set grid */
       var grid = $('.session-wrapper').masonry({
         itemSelector: '.scheduleday_wrapper',
         columnWidth: '.sizer',
         gutter: 20
       });
 
-      function sessionlistEmptyCheck() {
+      $(".session-item").bind('classChanged', debounce(function (e) {
         $(".scheduleday_wrapper").each(function () {
           if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
             $(this).hide();
@@ -571,12 +562,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
           }
         });
         grid.masonry();
-      }
+      }, 100));
 
-      /* Check empty session on class changed */
-      $(".session-item").bind('classChanged', debounce(sessionlistEmptyCheck, 100, false));
-
-      /* Expand div for description */
       $('li .session_content_wrapper.expandable').on('click', function (e) {
         var targetID = $(this).attr('data-expandid');
         $('#' + targetID).toggleClass('hide');
@@ -584,7 +571,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
         grid.masonry();
       });
 
-      /* Add active class if checked for filters*/
       $(".filter-container .checkbox").each(function () {
         if ($(this).find('input:checked').length > 0) {
           $(this).addClass("active");
@@ -593,16 +579,15 @@ window.addEventListener("DOMContentLoaded", function (event) {
         }
       });
 
-      /* Avoid propagation on register unregister */
       $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
         e.stopPropagation();
         grid.masonry();
       });
 
-      /* intit */
-      sessionlistEmptyCheck();
-      $('.session-container').toggleClass("ready");
-
+      $(window).load(function () {
+        grid.masonry();
+        $('.session-container').toggleClass("ready");
+      });
     });
   /* Session LIST Grand Conf*/
 
