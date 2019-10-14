@@ -168,8 +168,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }, 500);
     }, false);
 
-    /* init to first date  and change the behavior of the checkbox dates */
-    $(".search-filter input[type=checkbox][name^=dates]").first().prop('checked',true);
+  /* init to first date  and change the behavior of the checkbox dates */
+    if ($(".search-filter input[type=checkbox][name^=dates]:checked").length == 0) {
+      $(".search-filter input[type=checkbox][name^=dates]").first().prop('checked',true);
+    }
     $(".search-filter input[type=checkbox][name^=dates]").change(function() {
       $(".search-filter input[type=checkbox][name^=dates]").prop('checked',false);
       $(this).prop('checked',true);
