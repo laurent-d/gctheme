@@ -170,6 +170,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   /* init to first date  and change the behavior of the checkbox dates */
     if ($(".search-filter input[type=checkbox][name^=dates]:checked").length == 0) {
+      $(".search-filter input[type=checkbox][name^=dates]").first().trigger( "click" );
       $(".search-filter input[type=checkbox][name^=dates]").first().prop('checked',true);
     }
     $(".search-filter input[type=checkbox][name^=dates]").change(function() {
