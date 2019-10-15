@@ -126,6 +126,23 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
   // external js: flickity.pkgd.js
 
+/* Slideshow */
+
+  /* Slideshow BIS */
+
+  lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css","[data-section-type='guests-list-logo']");
+  lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js","[data-section-type='guests-list-logo']",
+    function () {
+      initFlkty();
+      window.addEventListener("resize", function () {
+        initFlkty();
+      });
+    }
+  );
+
+  /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
+  // external js: flickity.pkgd.js
+
   /* Slideshow */
 
 /* Synoptique */
