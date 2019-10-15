@@ -103,7 +103,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         autoPlay: autoPlayDelay,
         cellAlign: alignCell,
         contain: true,
-        prevNextButtons: false,
+        prevNextButtons: true,
         pageDots: false,
         on: { ready: function() {
           container.classList.add('slideshow_ready');
@@ -143,7 +143,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
   // external js: flickity.pkgd.js
 
-  /* Slideshow */
+  /* Slideshow BIS */
 
 /* Synoptique */
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/backdrop.css", "[data-section-type='sessions-list-synoptique']");
