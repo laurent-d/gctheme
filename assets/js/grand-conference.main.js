@@ -197,6 +197,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
     var item = $(".session-item");
     tippy('.session-item', {
+      popperOptions: {
+        positionFixed: true,
+      },
       animation: 'shift-away-subtle',
       theme: 'light',
       trigger: 'click',
@@ -204,6 +207,33 @@ window.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
     });
+
+      // console.log("bup");
+      // jQuery( ".open_mod" ).click(function() {
+      //   // alert( "Hello World" );
+      //   var toto = jQuery(this).parent().find("template").html();
+      //   jQuery( ".modal_content" ).empty().append(toto);
+      //   jQuery( ".modal" ).addClass("open");
+      //   jQuery( "body" ).toggleClass('ovh');
+      //   // console.log(toto);
+      // });
+
+      // jQuery( ".ui_close" ).click(function() {
+      //   jQuery( ".modal" ).removeClass("open");
+      //   jQuery( "body" ).toggleClass('ovh');
+      //   jQuery( ".modal_content" ).empty();
+      // });
+
+      // jQuery( "a.open-trigger" ).click(function(event) {
+      //   //event.preventDefault();
+      //   //alert( "Hello World" );
+      //   var hash = jQuery(this).attr('data-link');
+      //   // console.log(hash);
+      //   var coucou = jQuery( hash + ".open_mod").first();
+      //   // console.log(coucou);
+      //   jQuery( hash + " .open_mod:first").trigger("click");
+      // });
+
   });
 
   /* Synoptique */
