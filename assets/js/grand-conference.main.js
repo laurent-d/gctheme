@@ -199,6 +199,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
     tippy('.session-item', {
       popperOptions: {
         positionFixed: true,
+        modifiers: {
+          computeStyle: { enabled: false, gpuAcceleration: false },
+          preventOverflow: { padding: 0 },
+            },
       },
       appendTo: document.body,
       animation: 'shift-away-subtle',
@@ -206,6 +210,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       trigger: 'click',
       placement: 'right',
       interactive: true,
+      arrow: false,
       content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
     });
 
