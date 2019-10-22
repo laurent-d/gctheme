@@ -200,6 +200,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       popperOptions: {
         positionFixed: true,
       },
+      appendTo: document.body,
       animation: 'shift-away-subtle',
       theme: 'light',
       trigger: 'click',
