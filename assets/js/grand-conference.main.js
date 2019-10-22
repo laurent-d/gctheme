@@ -150,9 +150,16 @@ window.addEventListener("DOMContentLoaded", function (event) {
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/tippy.css", "[data-section-type='sessions-list-synoptique']");
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/themes/light.css", "[data-section-type='sessions-list-synoptique']");
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/animations/shift-away-subtle.css", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadScript("https://unpkg.com/popper.js@1", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadScript("https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']", function () {
+
+  Promise.all(
+    [
+    lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']"),
+    lazyLoadScript("https://unpkg.com/popper.js@1", "[data-section-type='sessions-list-synoptique']"),
+    lazyLoadScript("https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']")
+    ]
+     ).then(function () {
+       // React is ready, maybe load your component with lazyLoadScript() now?
+
 
     if ($('.filter-container').length > 0) {
       $(window).on('load resize', function () {
@@ -240,8 +247,75 @@ window.addEventListener("DOMContentLoaded", function (event) {
       //   // console.log(coucou);
       //   jQuery( hash + " .open_mod:first").trigger("click");
       // });
+      });
 
-  });
+  /* 
+  lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadScript("https://unpkg.com/popper.js@1", "[data-section-type='sessions-list-synoptique']");
+  lazyLoadScript("https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']", function () {
+
+    if ($('.filter-container').length > 0) {
+      $(window).on('load resize', function () {
+        // Enable fixed cart
+        if ($(document).outerWidth() > 767 && $('.grandconf .filter-container').length != 1 ) {
+          var top_cart = 0;
+          $('.filter-container').affix({
+            offset: {
+              top: $('[data-section-type="sessions-list-synoptique"]').offset().top,
+              bottom: ($('footer').outerHeight(true) + 85)
+            }
+          });
+          //$('.filter-container').css('width', $('.filter-container').parent().width());
+        } else {
+          $('.filter-container').removeClass("affix");
+        }
+      });
+    }
+
+    // Enhance scroll with disable hover on scroll
+    var body = $('body')[0], timer;
+
+    window.addEventListener('scroll', function() {
+      clearTimeout(timer);
+      if (!body.classList.contains('disable-hover')) {
+        body.classList.add('disable-hover')
+      }
+      timer = setTimeout(function() {
+        body.classList.remove('disable-hover')
+      }, 500);
+    }, false);
+
+  // init to first date  and change the behavior of the checkbox dates
+    if ($(".search-filter input[type=checkbox][name^=dates]:checked").length == 0) {
+      $(".search-filter input[type=checkbox][name^=dates]").first().trigger( "click" );
+      $(".search-filter input[type=checkbox][name^=dates]").first().prop('checked',true);
+    }
+    $(".search-filter input[type=checkbox][name^=dates]").change(function() {
+      $(".search-filter input[type=checkbox][name^=dates]").prop('checked',false);
+      $(this).prop('checked',true);
+    });
+
+    var item = $(".session-item");
+    tippy('.session-item', {
+      popperOptions: {
+        positionFixed: true,
+        modifiers: {
+          computeStyle: { enabled: false, gpuAcceleration: false },
+          preventOverflow: { padding: 0 },
+            },
+      },
+      appendTo: document.body,
+      animation: 'shift-away-subtle',
+      theme: 'light',
+      trigger: 'click',
+      placement: 'top',
+      maxWidth: 'none',
+      interactive: true,
+      arrow: false,
+      content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
+    });
+  }); 
+  */
 
   /* Synoptique */
 
