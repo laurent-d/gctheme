@@ -208,7 +208,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
       animation: 'shift-away-subtle',
       theme: 'light',
       trigger: 'click',
-      placement: 'right',
+      placement: 'top',
+      maxWidth: 'none',
       interactive: true,
       arrow: false,
       content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
