@@ -210,6 +210,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         trigger: 'click',
         placement: 'top',
         maxWidth: '100%',
+        zIndex: '99999999',
         interactive: true,
         arrow: false,
         content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
