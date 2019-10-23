@@ -209,7 +209,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         theme: 'light',
         trigger: 'click',
         placement: 'top',
-        //maxWidth: 'none',
+        maxWidth: '100%',
         interactive: true,
         arrow: false,
         content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
