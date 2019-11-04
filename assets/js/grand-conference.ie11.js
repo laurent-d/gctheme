@@ -570,9 +570,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/revslider/extensions/revolution.extension.video.min.js", "[data-overlay-mode^='video']");
   /* REVSLIDER VIDEO */
-
   /* Session LIST Grand Conf*/
-
   lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js", "[data-section-type='sessions-list'] .grandconf", function () {
     (function () {
       console.log("gridA");
@@ -604,6 +602,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
       };
     }
 
+    console.log("...");
+
     var grid = $('.session-wrapper').masonry({
       itemSelector: '.scheduleday_wrapper',
       columnWidth: '.sizer',
@@ -633,10 +633,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
     $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
+      console.log("click");
       e.stopPropagation();
       grid.masonry();
     });
     $(window).load(function () {
+      console.log("grid?");
       grid.masonry();
       console.log("grid?");
       $('.session-container').toggleClass("ready");
