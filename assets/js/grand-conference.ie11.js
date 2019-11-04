@@ -91,7 +91,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
       var cellsTotalWidth = 0;
 
       for (var i = 0, len = cells.length; i < len; i++) {
-        // someFn(cells[i]);
         var style = window.getComputedStyle(cells[i]);
         cellsTotalWidth += parseFloat(style.width) + parseFloat(style.marginRight) + parseFloat(style.marginLeft);
       }
@@ -120,6 +119,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       if (needWrap) {
         var alignCell = "left";
         var autoPlayDelay = autoPlaySpeed;
+        container.classList.remove('no-arrows');
       } else {
         var alignCell = "center";
         var autoPlayDelay = false;
