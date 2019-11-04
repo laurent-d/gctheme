@@ -81,7 +81,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   function checkWrap(container) {
     var carouselSelector = ".slideshow_enabled",
-        cellSelector = ".images-list-item"; // if sum(carousel-cell width) > carousel width then wrap else not
+      cellSelector = ".images-list-item"; // if sum(carousel-cell width) > carousel width then wrap else not
 
     var carousel = container;
     var cells = container.querySelectorAll(cellSelector);
@@ -108,7 +108,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function initFlkty() {
-    console.log("initFlkty");
+    //console.log("initFlkty");
     var carouselContainers = document.querySelectorAll(".slideshow_enabled");
 
     for (var i = 0; i < carouselContainers.length; i++) {
@@ -122,6 +122,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       } else {
         var alignCell = "center";
         var autoPlayDelay = false;
+        container.classList.add('no-arrows');
       }
 
       var flktyOptions = {
@@ -136,7 +137,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         on: {
           ready: function ready() {
             container.classList.add('slideshow_ready');
-            console.log("slideshow_ready");
+            //console.log("slideshow_ready");
           }
         }
       };
