@@ -100,6 +100,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function initFlkty() {
+    console.log("initFlkty");
     var carouselContainers = document.querySelectorAll(".slideshow_enabled");
 
     for (var i = 0; i < carouselContainers.length; i++) {
