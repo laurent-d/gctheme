@@ -575,6 +575,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
   lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js", "[data-section-type='sessions-list'] .grandconf", function () {
     (function () {
+      console.log("gridA");
       var originalAddClassMethod = $.fn.addClass;
       var originalRemoveClassMethod = $.fn.removeClass;
 
@@ -637,7 +638,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
     $(window).load(function () {
       grid.masonry();
-      console.log("grid?")
+      console.log("grid?");
       $('.session-container').toggleClass("ready");
     });
   });
