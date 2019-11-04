@@ -637,7 +637,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       e.stopPropagation();
       grid.masonry();
     });
-    $(window).load(function () {
+    $(window).on('load',function () {
       console.log("grid?");
       grid.masonry();
       console.log("grid?");
