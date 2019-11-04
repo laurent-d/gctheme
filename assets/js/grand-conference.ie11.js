@@ -573,7 +573,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Session LIST Grand Conf*/
   lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js", "[data-section-type='sessions-list'] .grandconf", function () {
     (function () {
-      console.log("gridA");
+      // console.log("gridA");
       var originalAddClassMethod = $.fn.addClass;
       var originalRemoveClassMethod = $.fn.removeClass;
 
@@ -602,13 +602,14 @@ window.addEventListener("DOMContentLoaded", function (event) {
       };
     }
 
-    console.log("...");
+    // console.log("...");
 
     var grid = $('.session-wrapper').masonry({
       itemSelector: '.scheduleday_wrapper',
       columnWidth: '.sizer',
       gutter: 20
     });
+
     $(".session-item").bind('classChanged', debounce(function (e) {
       $(".scheduleday_wrapper").each(function () {
         if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
@@ -626,6 +627,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       $(this).toggleClass('active');
       grid.masonry();
     });
+
     $(".filter-container .checkbox").each(function () {
       if ($(this).find('input:checked').length > 0) {
         $(this).addClass("active");
@@ -633,15 +635,16 @@ window.addEventListener("DOMContentLoaded", function (event) {
         $(this).show();
       }
     });
+
     $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
       console.log("click");
       e.stopPropagation();
       grid.masonry();
     });
 
-    console.log("grid?");
+    // console.log("grid?");
     grid.masonry();
-    console.log("grid?");
+    // console.log("grid?");
     $('.session-container').toggleClass("ready");
 
   });
