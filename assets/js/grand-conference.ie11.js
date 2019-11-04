@@ -127,6 +127,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         on: {
           ready: function ready() {
             container.classList.add('slideshow_ready');
+            console.log("slideshow_ready");
           }
         }
       };
