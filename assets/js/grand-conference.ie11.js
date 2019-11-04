@@ -88,10 +88,18 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
     if (carousel && cells) {
       var cellsTotalWidth = 0;
-      cells.forEach(function (cell) {
-        var style = window.getComputedStyle(cell);
+
+      for (var i = 0, len = cells.length; i < len; i++) {
+        // someFn(cells[i]);
+        var style = window.getComputedStyle(cells[i]);
         cellsTotalWidth += parseFloat(style.width) + parseFloat(style.marginRight) + parseFloat(style.marginLeft);
-      });
+      }
+
+      // cells.forEach(function (cell) {
+      //   var style = window.getComputedStyle(cell);
+      //   cellsTotalWidth += parseFloat(style.width) + parseFloat(style.marginRight) + parseFloat(style.marginLeft);
+      // });
+
       var carouselWidth = parseFloat(window.getComputedStyle(carousel).width);
       return cellsTotalWidth > carouselWidth;
     }
