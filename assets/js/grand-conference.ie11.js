@@ -619,6 +619,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       });
       grid.masonry();
     }, 100));
+
     $('li .session_content_wrapper.expandable').on('click', function (e) {
       var targetID = $(this).attr('data-expandid');
       $('#' + targetID).toggleClass('hide');
@@ -637,12 +638,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
       e.stopPropagation();
       grid.masonry();
     });
-    $(window).on('load',function () {
-      console.log("grid?");
-      grid.masonry();
-      console.log("grid?");
-      $('.session-container').toggleClass("ready");
-    });
+
+    console.log("grid?");
+    grid.masonry();
+    console.log("grid?");
+    $('.session-container').toggleClass("ready");
+
   });
   /* Session LIST Grand Conf*/
 });
