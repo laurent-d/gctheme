@@ -1,5 +1,3 @@
-"use strict";
-
 /* GRAND CONFERENCE ADD-ON F(X) */
 window.addEventListener("DOMContentLoaded", function (event) {
   /* Charts-columns */
@@ -639,6 +637,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
     $(window).load(function () {
       grid.masonry();
+      console.log("grid?")
       $('.session-container').toggleClass("ready");
     });
   });
