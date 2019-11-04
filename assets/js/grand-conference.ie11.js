@@ -80,6 +80,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Slideshow */
 
   function checkWrap(container) {
+    console.log("checkWrap");
     var carouselSelector = ".slideshow_enabled",
       cellSelector = ".images-list-item"; // if sum(carousel-cell width) > carousel width then wrap else not
 
@@ -150,6 +151,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     initFlkty();
     window.addEventListener("resize", function () {
       initFlkty();
+      console.log("resize");
     });
   });
   /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
