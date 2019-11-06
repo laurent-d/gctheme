@@ -215,6 +215,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
         arrow: false,
         content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
       });
+
+      // close on click
+      $(document).on('click', '.close_info', function(e) {
+        $(e.target).closest('.tippy-popper')[0]._tippy.hide();
+      });
+
     });
   });
 
