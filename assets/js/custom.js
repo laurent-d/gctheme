@@ -146,11 +146,10 @@ jQuery(document).ready(function(){
 					jQuery('.header_style_wrapper').addClass('scroll');
 					jQuery('.top_bar').addClass('scroll');
 
-					if(jQuery('.top_bar').hasClass('hasbg'))
+					if(jQuery('.top_bar').hasClass('hasbg') || jQuery('.top_bar').hasClass('enable-top_bar-fixed'))
 					{
 					    jQuery('.top_bar').removeClass('hasbg');
 					    jQuery('.top_bar').data('hasbg', 1);
-
 					    jQuery('#custom_logo').removeClass('hidden');
 					    jQuery('#custom_logo_transparent').addClass('hidden');
 					}
