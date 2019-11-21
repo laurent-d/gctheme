@@ -148,10 +148,11 @@ jQuery(document).ready(function(){
 
 					if(jQuery('.top_bar').hasClass('hasbg') || jQuery('.top_bar').hasClass('enable-top_bar-fixed'))
 					{
-					    jQuery('.top_bar').removeClass('hasbg');
-					    jQuery('.top_bar').data('hasbg', 1);
-					    jQuery('#custom_logo').removeClass('hidden');
-					    jQuery('#custom_logo_transparent').addClass('hidden');
+						console.log("fixed");
+						jQuery('.top_bar').removeClass('hasbg');
+						jQuery('.top_bar').data('hasbg', 1);
+						jQuery('#custom_logo').removeClass('hidden');
+						jQuery('#custom_logo_transparent').addClass('hidden');
 					}
 			    }
 			    else if(jQuery(this).scrollTop() < 200)
