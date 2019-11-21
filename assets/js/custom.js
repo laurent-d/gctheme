@@ -138,7 +138,7 @@ jQuery(document).ready(function(){
 		jQuery('#page_content_wrapper.split, .page_content_wrapper.split').css('paddingBottom', parseInt(topBarHeight+jQuery('.header_style_wrapper .above_top_bar').height())+'px');
 
 		jQuery(window).scroll(function(){
-			if(jQuery('#pp_fixed_menu').val()==1 && jQuery('html').data('style') != 'fullscreen'  && jQuery('html').data('style') != 'fullscreen_white')
+			if(jQuery('#pp_fixed_menu').val()==1 && jQuery('#tg_smart_fixed_menu').val()==1 && jQuery('html').data('style') != 'fullscreen'  && jQuery('html').data('style') != 'fullscreen_white')
 			{
 				if(jQuery(this).scrollTop() >= 200){
 					jQuery('.extend_top_contact_info').hide();
@@ -146,13 +146,13 @@ jQuery(document).ready(function(){
 					jQuery('.header_style_wrapper').addClass('scroll');
 					jQuery('.top_bar').addClass('scroll');
 
-					if(jQuery('.top_bar').hasClass('hasbg') || jQuery('.top_bar').hasClass('enable-top_bar-fixed'))
+					if(jQuery('.top_bar').hasClass('hasbg'))
 					{
-						console.log("fixed");
-						jQuery('.top_bar').removeClass('hasbg');
-						jQuery('.top_bar').data('hasbg', 1);
-						jQuery('#custom_logo').removeClass('hidden');
-						jQuery('#custom_logo_transparent').addClass('hidden');
+					    jQuery('.top_bar').removeClass('hasbg');
+					    jQuery('.top_bar').data('hasbg', 1);
+
+					    jQuery('#custom_logo').removeClass('hidden');
+					    jQuery('#custom_logo_transparent').addClass('hidden');
 					}
 			    }
 			    else if(jQuery(this).scrollTop() < 200)
