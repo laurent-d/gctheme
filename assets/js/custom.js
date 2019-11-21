@@ -180,17 +180,17 @@ jQuery(document).ready(function(){
 					jQuery('.top_bar').removeClass('scroll');
 			    }
 		   }
-		   else
-		   {
-			   if(jQuery(this).scrollTop() >= 200)
-			   {
-			   		jQuery('.header_style_wrapper').addClass('nofixed');
-			   }
-			   else
-			   {
-			   		jQuery('.header_style_wrapper').removeClass('nofixed');
-			   }
-		   }
+		  //  else
+		  //  {
+			//    if(jQuery(this).scrollTop() >= 200)
+			//    {
+			//    		jQuery('.header_style_wrapper').addClass('nofixed');
+			//    }
+			//    else
+			//    {
+			//    		jQuery('.header_style_wrapper').removeClass('nofixed');
+			//    }
+		  //  }
 		});
 
 		if(jQuery('#tg_smart_fixed_menu').val()==1 && jQuery('html').data('style') != 'fullscreen'  && jQuery('html').data('style') != 'fullscreen_white')
