@@ -113,8 +113,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 
-  lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css","[data-section-type='images-list']");
-  lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js","[data-section-type='images-list']",
+  lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css",".slideshow_enabled");
+  lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js",".slideshow_enabled",
     function () {
       initFlkty();
       window.addEventListener("resize", function () {
@@ -126,26 +126,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
   // external js: flickity.pkgd.js
 
-/* Slideshow */
+  /* Slideshow */
 
-  /* Slideshow BIS */
-
-  lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css","[data-section-type='guests-list-logo']");
-  lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js","[data-section-type='guests-list-logo']",
-    function () {
-      initFlkty();
-      window.addEventListener("resize", function () {
-        initFlkty();
-      });
-    }
-  );
-
-  /* Source : https://codepen.io/anon/pen/OaYVZr FOR AUTOPLAY AND WRAPPARROUND */
-  // external js: flickity.pkgd.js
-
-  /* Slideshow BIS */
-
-/* Synoptique */
+  /* Synoptique */
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/backdrop.css", "[data-section-type='sessions-list-synoptique']");
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/tippy.css", "[data-section-type='sessions-list-synoptique']");
   lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/themes/light.css", "[data-section-type='sessions-list-synoptique']");
@@ -556,77 +539,84 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
-    function () {
-      (function () {
-        var originalAddClassMethod = $.fn.addClass;
-        var originalRemoveClassMethod = $.fn.removeClass;
-        $.fn.addClass = function () {
-          var result = originalAddClassMethod.apply(this, arguments);
-          $(this).trigger('classChanged');
-          return result;
-        }
-        $.fn.removeClass = function () {
-          var result = originalRemoveClassMethod.apply(this, arguments);
-          $(this).trigger('classChanged');
-          return result;
-        }
-      })();
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/jquery.masory.js","[data-section-type='sessions-list']", function () {
 
-      function debounce(callback, delay) {
-        var timer;
-        return function () {
-          var args = arguments;
-          var context = this;
-          clearTimeout(timer);
-          timer = setTimeout(function () {
-            callback.apply(context, args);
-          }, delay)
-        }
+    /* set grid */
+    var grid = $('.session-wrapper').masonry({
+      itemSelector: '.scheduleday_wrapper',
+      columnWidth: '.sizer',
+      gutter: 20
+    });
+
+    /* Check empty session on class changed */
+    $(".session-item").bind('classChanged', debounce(sessionlistEmptyCheck, 100, false));
+
+    /* Expand div for description */
+    $('li .session_content_wrapper.expandable').on('click', function (e) {
+      var targetID = $(this).attr('data-expandid');
+      $('#' + targetID).toggleClass('hide');
+      $(this).toggleClass('active');
+      grid.masonry();
+    });
+
+    /* Add active class if checked for filters*/
+    $(".filter-container .checkbox").each(function () {
+      if ($(this).find('input:checked').length > 0) {
+        $(this).addClass("active");
+      } else {
+        $(this).show();
       }
+    });
 
-      var grid = $('.session-wrapper').masonry({
-        itemSelector: '.scheduleday_wrapper',
-        columnWidth: '.sizer',
-        gutter: 20
-      });
+    /* Avoid propagation on register unregister */
+    $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
+      e.stopPropagation();
+      grid.masonry();
+    });
 
-      $(".session-item").bind('classChanged', debounce(function (e) {
-        $(".scheduleday_wrapper").each(function () {
-          if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
-            $(this).hide();
-          } else {
-            $(this).show();
-          }
-        });
-        grid.masonry();
-      }, 100));
+    /* init */
+    sessionlistEmptyCheck();
+    $('.session-container').toggleClass("ready");
 
-      $('li .session_content_wrapper.expandable').on('click', function (e) {
-        var targetID = $(this).attr('data-expandid');
-        $('#' + targetID).toggleClass('hide');
-        $(this).toggleClass('active');
-        grid.masonry();
-      });
+    /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
+    var originalAddClassMethod = $.fn.addClass;
+    var originalRemoveClassMethod = $.fn.removeClass;
+    $.fn.addClass = function () {
+      var result = originalAddClassMethod.apply(this, arguments);
+      $(this).trigger('classChanged');
+      return result;
+    }
+    $.fn.removeClass = function () {
+      var result = originalRemoveClassMethod.apply(this, arguments);
+      $(this).trigger('classChanged');
+      return result;
+    }
 
-      $(".filter-container .checkbox").each(function () {
-        if ($(this).find('input:checked').length > 0) {
-          $(this).addClass("active");
+    /* Debounce function to avoid multiple call need to be scoped */
+    function debounce(callback, delay) {
+      var timer;
+      return function () {
+        var args = arguments;
+        var context = this;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          callback.apply(context, args);
+        }, delay)
+      }
+    }
+
+    function sessionlistEmptyCheck() {
+      $(".scheduleday_wrapper").each(function () {
+        if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
+          $(this).hide();
         } else {
           $(this).show();
         }
       });
+      grid.masonry();
+    }
 
-      $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
-        e.stopPropagation();
-        grid.masonry();
-      });
-
-      $(window).load(function () {
-        grid.masonry();
-        $('.session-container').toggleClass("ready");
-      });
-    });
+  });
   /* Session LIST Grand Conf*/
 
 });
