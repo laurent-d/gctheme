@@ -174,6 +174,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
       } else {
         $checkedDates.filter(':checked').parent().addClass("active");
       }
+      
+      $(document).on('click', '.filter-button', function(e) {
+        $('.filter-container .panel').toggleClass('open');
+      });
 
       tippy('[data-section-type="sessions-list-synoptique"] .session-item', {
         popperOptions: {
