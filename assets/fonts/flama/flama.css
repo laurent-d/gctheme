@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'flamabold_italic';
+    src: url('flama_bold_italic-webfont.woff2') format('woff2'),
+         url('flama_bold_italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamaitalic';
+    src: url('flama_italic-webfont.woff2') format('woff2'),
+         url('flama_italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamaregular';
+    src: url('flama_regular-webfont.woff2') format('woff2'),
+         url('flama_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamabold';
+    src: url('flama-bold-webfont.woff2') format('woff2'),
+         url('flama-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamalight';
+    src: url('flama-light-webfont.woff2') format('woff2'),
+         url('flama-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamalight_italic';
+    src: url('flama-lightitalic-webfont.woff2') format('woff2'),
+         url('flama-lightitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'flamamedium';
+    src: url('flama-medium-webfont.woff2') format('woff2'),
+         url('flama-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
