@@ -528,7 +528,7 @@ function displayTicketsCount($ticketsBlock, count) {
 function setupInlineLinkedGuest($linkedGuestBlock) {
   $linkedGuestBlock.find(".form-inline .form-group").each(function () {
     var label = $(this).find('label.control-label').text();
-    $(this).find('[type=text]').attr('placeholder', label);
+    $(this).find('[type=text], [type=email]').attr('placeholder', label);
     $(this).addClass("has-tooltip").attr("data-placement", "top").attr("title", label);
   });
   $removeButton = $linkedGuestBlock.find('.remove-linked-guest').eq(0).detach();
