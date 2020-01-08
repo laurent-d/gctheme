@@ -49,22 +49,37 @@ $(function () {
   
   console.log("Calendar");
   
-  if (navigator.msSaveBlob) { // IE 10+
-    console.log("it is microsoft");
-    // var exportedFilenmae = 'somedata.csv';
-    // var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
-    // navigator.msSaveBlob(blob, exportedFilenmae);
-  }
-
-  $(document).on('click', '.icon-ical, .icon-outlook', function (e) {
-    e.preventDefault();
-    console.log("bip class");
-  });
-
+  // if (navigator.msSaveBlob) { // IE 10+
+  //   console.log("it is microsoft");
+  //   $(document).on('click', 'a[href^=data]', function (e) {
+  //     e.preventDefault();
+  //     console.log("bip href data");
+  //     var dataCal = $(this).attr('href');
+  //     var exportedFilename = 'calendrier.ics';
+  //     var blob = new Blob(dataCal, { type: 'text/csv;charset=utf-8;' });
+  //     navigator.msSaveBlob(blob, exportedFilename);
+  //   });
+  // }
+  
   $(document).on('click', 'a[href^=data]', function (e) {
     e.preventDefault();
     console.log("bip href data");
+    var dataCal = $(this).attr('href');
+    console.log(dataCal);
+    var exportedFilename = 'calendrier.ics';
+    var blob = new Blob([dataCal], { type: 'data:text/calendar;' });
+    navigator.msSaveBlob(blob, exportedFilename);
   });
+
+  // $(document).on('click', '.icon-ical, .icon-outlook', function (e) {
+  //   e.preventDefault();
+  //   console.log("bip class");
+  // });
+
+  // $(document).on('click', 'a[href^=data]', function (e) {
+  //   e.preventDefault();
+  //   console.log("bip href data");
+  // });
 
   /* TICKETING */
 
