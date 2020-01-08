@@ -65,9 +65,11 @@ $(function () {
     e.preventDefault();
     console.log("bip href data");
     var dataCal = $(this).attr('href');
+    var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "")
     console.log(dataCal);
+    console.log(dataCalR);
     var exportedFilename = 'calendrier.ics';
-    var blob = new Blob([dataCal], { type: 'data:text/calendar;' });
+    var blob = new Blob([dataCalR], { type: 'text/calendar;charset=utf-8;' });
     navigator.msSaveBlob(blob, exportedFilename);
   });
 
