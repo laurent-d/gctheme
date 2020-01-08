@@ -65,9 +65,9 @@ $(function () {
     e.preventDefault();
     console.log("bip href data");
     var dataCal = $(this).attr('href');
-    var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "")
-    var dataCalRII = dataCalR.replace(/%0A/g, "\r\n");
-    var dataCalT = decodeURI(dataCalR);
+    var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "");
+    var dataCalRII = decodeURI(dataCalR);
+    var dataCalT = decodeURI($(this).attr('href')).replace("data:text/calendar;charset=utf8,", "");
     console.log(dataCal);
     console.log(dataCalR);
     console.log(dataCalRII);
