@@ -61,21 +61,17 @@ $(function () {
   //   });
   // }
   
-  $(document).on('click', 'a[href^=data]', function (e) {
-    e.preventDefault();
-    console.log("bip href data");
-    var dataCal = $(this).attr('href');
-    var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "");
-    var dataCalRII = decodeURI(dataCalR);
-    var dataCalT = decodeURI($(this).attr('href')).replace("data:text/calendar;charset=utf8,", "");
-    console.log(dataCal);
-    console.log(dataCalR);
-    console.log(dataCalRII);
-    console.log(dataCalT);
-    var exportedFilename = 'calendrier.ics';
-    var blob = new Blob([dataCalRII], { type: 'text/calendar;charset=utf-8;' });
-    navigator.msSaveBlob(blob, exportedFilename);
-  });
+  if (navigator.msSaveBlob) { // IE 10+
+    $(document).on('click', 'a[href^=data]', function (e) {
+      e.preventDefault();
+      console.log("microsoft only");
+      var dataCal = decodeURI($(this).attr('href')).replace("data:text/calendar;charset=utf8,", "");
+      console.log(dataCal);
+      var exportedFilename = 'calendrier.ics';
+      var blob = new Blob([dataCal], { type: 'text/calendar;charset=utf-8;' });
+      navigator.msSaveBlob(blob, exportedFilename);
+    });
+  }
 
   // $(document).on('click', '.icon-ical, .icon-outlook', function (e) {
   //   e.preventDefault();
