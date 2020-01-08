@@ -66,7 +66,7 @@ $(function () {
     console.log("bip href data");
     var dataCal = $(this).attr('href');
     var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "").replace(/\n/g, "\r\n");
-    var dataCalRII = dataCalR.replace(/%0/g, "\r\n");
+    var dataCalRII = dataCalR.replace(/%0A/g, "\r\n");
     console.log(dataCal);
     console.log(dataCalR);
     console.log(dataCalRII);
