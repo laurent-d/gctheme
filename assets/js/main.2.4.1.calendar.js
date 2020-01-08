@@ -65,11 +65,13 @@ $(function () {
     e.preventDefault();
     console.log("bip href data");
     var dataCal = $(this).attr('href');
-    var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "")
+    var dataCalR = dataCal.replace("data:text/calendar;charset=utf8,", "").replace(/\n/g, "\r\n");
+    var dataCalRII = dataCalR.replace(/%0/g, "\r\n");
     console.log(dataCal);
     console.log(dataCalR);
+    console.log(dataCalRII);
     var exportedFilename = 'calendrier.ics';
-    var blob = new Blob([dataCalR], { type: 'text/calendar;charset=utf-8;' });
+    var blob = new Blob([dataCalRII], { type: 'text/calendar;charset=utf-8;' });
     navigator.msSaveBlob(blob, exportedFilename);
   });
 
