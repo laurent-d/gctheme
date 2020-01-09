@@ -45,43 +45,17 @@ $(function () {
     });
   });
   
-  /* Add-to-calendar behavior for MS Browser */
-  
-  console.log("Calendar");
-  
-  // if (navigator.msSaveBlob) { // IE 10+
-  //   console.log("it is microsoft");
-  //   $(document).on('click', 'a[href^=data]', function (e) {
-  //     e.preventDefault();
-  //     console.log("bip href data");
-  //     var dataCal = $(this).attr('href');
-  //     var exportedFilename = 'calendrier.ics';
-  //     var blob = new Blob(dataCal, { type: 'text/csv;charset=utf-8;' });
-  //     navigator.msSaveBlob(blob, exportedFilename);
-  //   });
-  // }
+  /* ADD TO CALENDAR MS Browser */
   
   if (navigator.msSaveBlob) { // IE 10+
-    $(document).on('click', 'a[href^=data]', function (e) {
+    $(document).on('click', '.icon-ical, .icon-outlook', function (e) {
       e.preventDefault();
-      console.log("microsoft only");
       var dataCal = decodeURI($(this).attr('href')).replace("data:text/calendar;charset=utf8,", "");
-      console.log(dataCal);
-      var exportedFilename = 'calendrier.ics';
       var blob = new Blob([dataCal], { type: 'text/calendar;charset=utf-8;' });
-      navigator.msSaveBlob(blob, exportedFilename);
+      navigator.msSaveBlob(blob, 'calendrier.ics');
     });
   }
-
-  // $(document).on('click', '.icon-ical, .icon-outlook', function (e) {
-  //   e.preventDefault();
-  //   console.log("bip class");
-  // });
-
-  // $(document).on('click', 'a[href^=data]', function (e) {
-  //   e.preventDefault();
-  //   console.log("bip href data");
-  // });
+  /* ADD TO CALENDAR MS Browser END */
 
   /* TICKETING */
 
