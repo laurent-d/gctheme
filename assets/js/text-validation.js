@@ -8,8 +8,8 @@ function _validateDigits(value) {
   return reg.test(value);
 }
 
-function _validateFloat(value) {
-  var reg = new RegExp('^[0-9]+(\.[0-9]+)?$');
+function _validateFloat(value){
+  var reg = new RegExp ('^[0-9]+(\.[0-9]+)?$');
   return reg.test(value);
 }
 
@@ -27,14 +27,10 @@ function _displayError(bloc, type, messageOverwrite) {
   if (messageOverwrite === void 0) {
     messageOverwrite = null;
   }
-
   $bloc = bloc;
-  var locale = errorsTranslations[LANG] != undefined ? LANG : "en";
+  var locale = (errorsTranslations[LANG] != undefined)  ? LANG : "en";
   var message = messageOverwrite || errorsTranslations[locale][type];
-  $bloc.css({
-    "borderColor": "#b94a48"
-  });
-
+  $bloc.css({"borderColor":"#b94a48"});
   if ($bloc.parents('.control-group').length > 0) {
     if ($bloc.siblings('.help-inline').find('.text-error').length == 0) {
       $bloc.after("<span class='help-inline'><span class='text-error'>" + message + "</span></span>");
@@ -52,15 +48,10 @@ function _displayError(bloc, type, messageOverwrite) {
 
 function _removeError(bloc) {
   $bloc = bloc;
-
   if ($bloc.parents('.control-group').length > 0) {
-    $bloc.css({
-      "borderColor": "#ccc"
-    }).siblings(".help-inline").find('.text-error').closest('.help-inline').remove();
+    $bloc.css({"borderColor":"#ccc"}).siblings(".help-inline").find('.text-error').closest('.help-inline').remove();
   } else {
-    $bloc.css({
-      "borderColor": "#ccc"
-    }).siblings(".help-block").find('.text-danger').closest('.help-block').remove();
+    $bloc.css({"borderColor":"#ccc"}).siblings(".help-block").find('.text-danger').closest('.help-block').remove();
   }
 }
 
@@ -114,81 +105,80 @@ errorsTranslations = {
     "phone-number": "Nieprawidłowy numer",
     "duplicate": "Wprowadź 2 identyczne wartości"
   }
-};
-$(document).ready(function () {
-  $(document).on('blur', "[data-text-validation*=digits]", function (e) {
-    if ($(this).val() != "" && !_validateDigits($(this).val())) {
+}
+
+$(document).ready(function(){
+
+  $(document).on('blur', "[data-text-validation*=digits]", function(e) {
+    if($(this).val() != "" && !_validateDigits($(this).val())){
       _displayError($(this), "digits");
-
       $("[type=submit]").attr("disabled", true);
     } else {
       _removeError($(this));
-
       $("[type=submit]").attr("disabled", false);
     }
   });
-  $(document).on('blur', "[data-text-validation*=float]", function (e) {
-    if ($(this).val() != "" && !_validateFloat($(this).val())) {
+
+  $(document).on('blur', "[data-text-validation*=float]", function(e) {
+    if($(this).val() != "" && !_validateFloat($(this).val())){
       _displayError($(this), "float");
-
       $("[type=submit]").attr("disabled", true);
     } else {
       _removeError($(this));
-
       $("[type=submit]").attr("disabled", false);
     }
   });
-  $(document).on('blur', "[data-text-validation*=lowercase]", function () {
+
+  $(document).on('blur', "[data-text-validation*=lowercase]", function() {
     $(this).val(function (_, val) {
       return val.toLowerCase();
     });
   });
-  $(document).on('blur', "[data-text-validation*=uppercase]", function () {
+
+  $(document).on('blur', "[data-text-validation*=uppercase]", function() {
     $(this).val(function (_, val) {
       return val.toUpperCase();
     });
   });
-  $(document).on('blur', "[data-text-validation*=capitalize]", function (e) {
-    $(this).val($(this).val().toLowerCase().replace(/(?:[ -]|^)(.)/gi, function (letter) {
+
+  $(document).on('blur', "[data-text-validation*=capitalize]", function(e) {
+    $(this).val($(this).val().toLowerCase().replace(/(?:[ -]|^)(.)/gi, function(letter) {
       return letter.toUpperCase();
     }));
   });
-  $(document).on('blur', "[data-text-validation*=email]", function () {
+
+  $(document).on('blur', "[data-text-validation*=email]", function() {
     if ($(this).val() != "" && !_validateEmail($(this).val())) {
       _displayError($(this), "email");
-
       $("[type=submit]").attr("disabled", true);
     } else {
       _removeError($(this));
-
       $("[type=submit]").attr("disabled", false);
     }
   });
-  $(document).on('blur', "[data-text-validation*=mobile]", function (e) {
-    if ($(this).val() != "" && !_validateMobile($(this).val())) {
+
+  $(document).on('blur', "[data-text-validation*=mobile]", function(e) {
+    if($(this).val() != "" && !_validateMobile($(this).val())){
       _displayError($(this), "phone-number");
-
       $("[type=submit]").attr("disabled", true);
     } else {
       _removeError($(this));
-
       $("[type=submit]").attr("disabled", false);
     }
   });
-  $(document).on('blur', "[data-text-validation*=phone]", function (e) {
-    if ($(this).val() != "" && !_validatePhone($(this).val())) {
+
+  $(document).on('blur', "[data-text-validation*=phone]", function(e) {
+    if($(this).val() != "" && !_validatePhone($(this).val())){
       _displayError($(this), "phone-number");
-
       $("[type=submit]").attr("disabled", true);
     } else {
       _removeError($(this));
-
       $("[type=submit]").attr("disabled", false);
     }
   });
-  $(document).on('blur', "[data-duplicate]", function () {
+
+  $(document).on('blur', "[data-duplicate]", function(){
     searchField = $(this).attr("data-duplicate");
-
     if ($(this).closest("[id*=linked-person]").length > 0) {
       linked_guest_index = $(this).closest("[id*=linked-person]").attr('id').split('linked-person-')[1];
 
@@ -198,26 +188,23 @@ $(document).ready(function () {
         var target = '[name*=' + linked_guest_index + '\\]\\[' + searchField + '\\]]';
       }
     } else {
-      if ($('[name=guest\\[guest_metadata\\[' + searchField + '\\]\\]]').length > 0) {
-        var target = '[name=guest\\[guest_metadata\\[' + searchField + '\\]\\]]';
+      if ($('[name=guest\\[guest_metadata\\['+ searchField +'\\]\\]]').length > 0) {
+        var target = '[name=guest\\[guest_metadata\\['+ searchField +'\\]\\]]';
       } else {
         var target = '[name=guest\\[' + searchField + '\\]]';
       }
     }
-
     searchValue = $(target).val();
 
     if ($(this).val() != "" && $(this).val() != searchValue) {
       if ($(this).attr("data-duplicate-error-" + LANG).length > 0) {
         _displayError($(this), "duplicate", $(this).attr("data-duplicate-error-" + LANG));
-      } else {
+      } else { 
         _displayError($(this), "duplicate");
       }
-
       $("[type=submit]").attr("disabled", true);
     } else {
       _removeError($(this));
-
       $("[type=submit]").attr("disabled", false);
     }
   });
