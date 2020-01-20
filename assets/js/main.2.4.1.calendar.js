@@ -46,9 +46,8 @@ $(function () {
   });
   
   /* ADD TO CALENDAR MS Browser */
-  
   if (navigator.msSaveBlob) { // IE 10+
-    $(document).on('click', '.icon-ical, .icon-outlook', function (e) {
+    $(document).on('click', '#addToMyCalendarModal .icon-ical, #addToMyCalendarModal .icon-outlook', function (e) {
       e.preventDefault();
       var dataCal = decodeURI($(this).attr('href')).replace("data:text/calendar;charset=utf8,", "");
       var blob = new Blob([dataCal], { type: 'text/calendar;charset=utf-8;' });
