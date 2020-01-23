@@ -3,9 +3,7 @@
 window.addEventListener("DOMContentLoaded", function (event) {
 
   /* Charts-columns */
-  var getCounter =
-
-  function () {
+  var getCounter =function () {
     "use strict";
 
     function getCounter(startCount, endCount, timer, html) {
@@ -79,7 +77,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     var cells = container.querySelectorAll(cellSelector);
     if (carousel && cells) {
       var cellsTotalWidth = 0;
-      cells.forEach(cell => {
+      cells.forEach(function (cell) {
         var style = window.getComputedStyle(cell);
         cellsTotalWidth +=
           parseFloat(style.width) +
