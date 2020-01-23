@@ -446,8 +446,14 @@ $(function () {
   // Social Network Sharing
   lazyLoadScript("https://cdn.jsdelivr.net/npm/goodshare.js@6/goodshare.min.js", "[data-section-type='social-networks-sharing']");
 
-  // Sessions search
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/sessions-search.1.0.0.ie11.js?v=3", ".sessions-search-form");
+  // Sessions search 
+  if ((/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent)) { 
+    /* do something for ie 11 */
+    lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/sessions-search.1.0.0.ie11.js?v=3", ".sessions-search-form");
+  } else {
+    lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/sessions-search.1.0.0.js?v=3", ".sessions-search-form");
+  }
+  
 
   // Programme DatetimeOverlapse
   lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/datetime-overlapse.1.0.0.js?v=3", "[data-section-type='sessions-list'], [data-section-type='session-info']", function () {
