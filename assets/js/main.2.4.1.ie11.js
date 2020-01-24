@@ -446,9 +446,11 @@ $(function () {
   // Social Network Sharing
   lazyLoadScript("https://cdn.jsdelivr.net/npm/goodshare.js@6/goodshare.min.js", "[data-section-type='social-networks-sharing']");
 
+  //  Check if ie11
+  var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
+  
   // Sessions search 
-  if ((/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent)) { 
-    /* do something for ie 11 */
+  if (isIE11) { 
     lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/sessions-search.1.0.0.ie11.js?v=3", ".sessions-search-form");
   } else {
     lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/sessions-search.1.0.0.js?v=3", ".sessions-search-form");
