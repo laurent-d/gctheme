@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019
+ * Copyright (c) 2020
  *
  * Features:
  *  - URL params tracking
@@ -20,12 +20,15 @@
  *  - Social network sharing
  *  - Sessions search
  *  - Collapsable elements
- *  - Select Multiple value
+ *  - Select Multiple value (SOL)
  *  - DateTime Overlapse in programme
  *  - Dropdown menu with submenus
+ *  - Handle Speakers MultiSelect (SOL)
+ *  - Add Speakers into SOL
+ *  - Add to calendar ICS for MS Browser ie10+
  *
  * Created       : 2019-05-27 by @opheJansen
- * Last modified : 2019-10-18 by @opheJansen
+ * Last modified : 2020-01-09 by @laurent-d
  */
 
 
@@ -181,34 +184,74 @@ $(function () {
     });
   }
   /* END INLINE SUBFORM */
+  
+  /* CART SESSION LIST */
+  function showSessionCartIfCartItems() {
+    var $numberItems = $('.cart-panel .cart-items .row').length;
+    if ($numberItems > 0) {
+      $('.cart-session-container').removeClass("hide");
+      $('.cart-indicator').text($numberItems);
+    } else {
+      $('.cart-session-container').addClass("hide");
+    }
+  }
+
+  if ($('.cart-session-container').length > 0) {
+
+    showSessionCartIfCartItems();
+
+    /* Set correct top if fixed header */
+    if ($('.header-fixed').length > 0) {
+      $('.cart-session-container').css("top", $('.header-fixed').innerHeight());
+    }
+
+    $(document).on('click', '.cart-icon', function () {
+      if ($('.cart-panel:visible').length > 0) {
+        $('.cart-panel').addClass("hide");
+      } else {
+        $('.cart-panel').removeClass("hide");
+      }
+    });
+
+    /* WATCH changes on cart */
+    $(document).on('DOMSubtreeModified', ".cart-session-container .cart-items", function () {
+      showSessionCartIfCartItems();
+    });
+
+  }
+
+  /* END CART SESSION LIST */
 
   if ($('.cart-container').length > 0) {
     /* Initalize Caddie for price refresh */
     window.caddie = new mobicheckin.registration.Caddie();
     window.caddie.bind();
 
-    $(window).on('load resize', function () {
-      /* Enable fixed cart */
-      if ($(document).outerWidth() > 767) {
-        var top_cart = 0;
-        $('body div[data-section-type]').each(function () {
-          if ($(this).attr('data-section-type') != "registration-form") {
-            top_cart += $(this).outerHeight(true);
-          } else {
-            return false;
-          }
-        });
-        $('.cart-container').affix({
-          offset: {
-            top: top_cart,
-            bottom: $(document).outerHeight() - $('.form-actions').offset().top + 60
-          }
-        });
-        $('.cart-container').css('width', $('.cart-container').parent().width());
-      } else {
-        $('.cart-container').removeClass("affix").removeClass("affix-top");
-      }
-    });
+    if ($('.form-actions').length > 0) {
+      $(window).on('load resize', function () {
+        /* Enable fixed cart */
+        if ($(document).outerWidth() > 767) {
+          var top_cart = 0;
+          $('body div[data-section-type]').each(function () {
+            if ($(this).attr('data-section-type') != "registration-form") {
+              top_cart += $(this).outerHeight(true);
+            } else {
+              return false;
+            }
+          });
+          $('.cart-container').affix({
+            offset: {
+              top: top_cart,
+              bottom: $(document).outerHeight() - $('.form-actions').offset().top + 60
+            }
+          });
+          $('.cart-container').css('width', $('.cart-container').parent().width());
+        } else {
+          $('.cart-container').removeClass("affix").removeClass("affix-top");
+        }
+      });
+    }
+    
   };
 
   // CSS customization of linkedin share button which is not provided by JS API
@@ -385,7 +428,7 @@ $(function () {
   });
 
   /* Multiples Value List */
-  var multipickListScriptUrl = "https://applidget.github.io/vx-assets/templates/website/js/searchable-option-list.js?v=1";
+  var multipickListScriptUrl = "https://applidget.github.io/vx-assets/templates/website/js/searchable-option-list.js?v=3";
   var multipickListStylesheetUrl = "https://applidget.github.io/vx-assets/templates/website/css/searchable-option-list.css";
 
   lazyLoadScript(multipickListScriptUrl, "select[multiple=multiple]", function () {
@@ -449,7 +492,7 @@ $(function () {
   //  Check if ie11
   var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
   
-  // Sessions search 
+  // Sessions search
   if (isIE11) { 
     lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/sessions-search.1.0.0.ie11.js?v=3", ".sessions-search-form");
   } else {
@@ -472,6 +515,24 @@ $(function () {
     });
   });
 
+  /* Add Speakers into SOL */
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/add-speaker-session.1.0.0.js", ".add-speaker-container", function() {
+    $(document).on('submit', '.add-speaker-container .registration-form', function(e) {
+      e.preventDefault();
+      handleAddSpeaker($(this));
+    });
+  });
+  
+  /* ADD TO CALENDAR MS Browser */
+  if (navigator.msSaveBlob) { // IE 10+
+    $(document).on('click', '#addToMyCalendarModal .icon-ical, #addToMyCalendarModal .icon-outlook', function (e) {
+      e.preventDefault();
+      var dataCal = decodeURI($(this).attr('href')).replace("data:text/calendar;charset=utf8,", "");
+      var blob = new Blob([dataCal], { type: 'text/calendar;charset=utf-8;' });
+      navigator.msSaveBlob(blob, 'calendrier.ics');
+    });
+  }
+
 });
 
 // Images LazyLoad
@@ -487,6 +548,60 @@ function mutipickListCallback($guest) {
 
     $(this).searchableOptionList(params);
   });
+}
+
+// Formatted SOL options for submittable form
+function formatSpeakersFormData($select) {
+  $select.attr('name', "");
+  var $container = $select.prev('.sol-container'),
+      $options = $container.find('.sol-selection-container .sol-selection .sol-option');
+
+  $options.each(function (i, option) {
+    var $option = $(option),
+        $checkbox = $option.find('[type=checkbox]'),
+        guestId = $checkbox.val(),
+        garId = $select.find('option[value=' + guestId + ']').attr('data-gar-id');
+
+    if ($option.find('input[type=hidden][name^=\\]\\[type\\]]').length == 0 || $option.find('input[type=hidden][name^=\\]\\[guest_id\\]]').length == 0) {
+      if ($checkbox.attr('name').indexOf('[]') != -1) {
+        $checkbox.attr('name', $checkbox.attr('name').replace('[]', '[' + i + '][guest_id]'));
+      } else {
+        $checkbox.attr('name', $checkbox.attr('name') + '[' + i + '][guest_id]');
+      }
+      createMissingSpeakerInputs(i, $checkbox, garId);
+    }
+  });
+}
+
+// Create hidden fields for submittable guest_accesspoint_roles_attributes
+function createMissingSpeakerInputs(i, $checkbox, garId) {
+  if (garId) {
+    // create input '_id'
+    $checkbox.after(
+      $('<input />', {
+        type: 'hidden',
+        name: 'accesspoint[guest_accesspoint_roles_attributes][' + i + '][_id]',
+        value: garId
+      })
+    );
+  }
+  // create input 'type'
+  $checkbox.after(
+    $('<input />', {
+      type: 'hidden',
+      name: 'accesspoint[guest_accesspoint_roles_attributes][' + i + '][type]',
+      value: 'speaker'
+    })
+  );
+  // create input '_destroy'
+  $checkbox.after(
+    $('<input />', {
+      type: 'hidden',
+      name: 'accesspoint[guest_accesspoint_roles_attributes][' + i + '][_destroy]',
+      value: $checkbox.is(':checked') ? false : true
+    })
+  );
+
 }
 
 // URL params tracking
