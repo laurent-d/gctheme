@@ -164,7 +164,7 @@ class SessionsSearch {
 
     self.extractSearchParams();
     self.modifyPageURL();
-    self.sortItems();
+    //self.sortItems();
 
     self.sessionsList.find(".session-item").each(function(i, item) {
       self.showItemIfMatchesSearch($(item));
