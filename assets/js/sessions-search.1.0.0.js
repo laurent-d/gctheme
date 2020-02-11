@@ -11,6 +11,7 @@ class SessionsSearch {
     this.searchSessionTypes = null;
     this.searchThematics = null;
     this.searchLocations = null;
+    this.searchRecommendations = false;
     this.bindSearchEvents();
     this.search();
   }
@@ -76,6 +77,7 @@ class SessionsSearch {
     this.searchSessionTypes = this.extractArraySearchParam(searchParams, "session_types[]");
     this.searchThematics = this.extractArraySearchParam(searchParams, "thematics[]");
     this.searchLocations = this.extractArraySearchParam(searchParams, "locations[]");
+    this.searchRecommendations = this.extractArraySearchParam(searchParams, "recommendations") == "true";
   }
 
   normalizeTextSearch(search) {
@@ -148,11 +150,21 @@ class SessionsSearch {
       $item.addClass("hide");
   }
 
+  sortItems() {
+    const rankAttribute = this.searchRecommendations ? "data-recommendation-distance" : "data-rank";
+    this.sessionsList.each(function () {
+      $(this).find(".session-item").sort(function (a, b) {
+        return a.getAttribute(rankAttribute) - b.getAttribute(rankAttribute);
+      }).appendTo($(this));
+    });
+  }
+
   search() {
     const self = this;
 
     self.extractSearchParams();
-    self.modifyPageURL()
+    self.modifyPageURL();
+    self.sortItems();
 
     self.sessionsList.find(".session-item").each(function(i, item) {
       self.showItemIfMatchesSearch($(item));
