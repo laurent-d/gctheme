@@ -431,6 +431,7 @@ $(function () {
 
 /* Show If (Condition multiple) */
   if (isIE11) {
+    console.log("ie11");
     lazyLoadScript("https://applidget.github.io/vx-assets/shared/js/show-if/2.0.0/legacy/show-if.js", "[data-show-if]", function() {
       $(document).find("[data-show-if]").each(function () {
         ShowIf($(this));
@@ -444,6 +445,7 @@ $(function () {
       });
     });
   } else {
+    console.log("not ie11");
     lazyLoadScript("https://applidget.github.io/vx-assets/shared/js/show-if/2.0.0/show-if.js", "[data-show-if]", function() {
       $(document).find("[data-show-if]").each(function () {
         new ShowIf($(this));
