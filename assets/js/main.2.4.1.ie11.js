@@ -184,7 +184,7 @@ $(function () {
     });
   }
   /* END INLINE SUBFORM */
-  
+
   /* CART SESSION LIST */
   function showSessionCartIfCartItems() {
     var $numberItems = $('.cart-panel .cart-items .row').length;
@@ -251,7 +251,7 @@ $(function () {
         }
       });
     }
-    
+
   };
 
   // CSS customization of linkedin share button which is not provided by JS API
@@ -491,14 +491,14 @@ $(function () {
 
   //  Check if ie11
   var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
-  
+
   // Sessions search
-  if (isIE11) { 
+  if (isIE11) {
     lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/sessions-search.1.0.0.ie11.js?v=3", ".sessions-search-form");
   } else {
     lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/sessions-search.1.0.0.js?v=3", ".sessions-search-form");
   }
-  
+
 
   // Programme DatetimeOverlapse
   lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/datetime-overlapse.1.0.0.js?v=3", "[data-section-type='sessions-list'], [data-section-type='session-info']", function () {
@@ -509,7 +509,7 @@ $(function () {
 
     // onChange (register or unregister)
     $(document).ajaxComplete(function (event, request, settings) {
-      if (settings.url.indexOf('/update_jsonp?') != -1) {
+      if (settings.url.indexOf('/update_jsonp?') != -1 || settings.url.indexOf('/update_requiring_checkout?') != -1) {
         datetimeOverlapse();
       }
     });
@@ -522,7 +522,7 @@ $(function () {
       handleAddSpeaker($(this));
     });
   });
-  
+
   /* ADD TO CALENDAR MS Browser */
   if (navigator.msSaveBlob) { // IE 10+
     $(document).on('click', '#addToMyCalendarModal .icon-ical, #addToMyCalendarModal .icon-outlook', function (e) {
