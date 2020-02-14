@@ -433,6 +433,12 @@ $(function () {
     e.preventDefault();
   });
 
+  if (isIE11) {
+    console.log("ie11 - xxxx");
+  } else {
+    console.log("not ie11 - xxxx");
+  }
+
 /* Show If (Condition multiple) */
   if (isIE11) {
     console.log("ie11");
