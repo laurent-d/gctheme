@@ -36,6 +36,9 @@
 
 
 $(function () {
+  //  Check if ie11
+  var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
+
   $('[data-section-type=map]').has('.map-section-container').each(function (index, container) {
     var $container = $(container);
     var id = $container.attr('data-section-id');
@@ -510,9 +513,6 @@ $(function () {
 
   // Social Network Sharing
   lazyLoadScript("https://cdn.jsdelivr.net/npm/goodshare.js@6/goodshare.min.js", "[data-section-type='social-networks-sharing']");
-
-  //  Check if ie11
-  var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
 
   // Sessions search
   if (isIE11) {
