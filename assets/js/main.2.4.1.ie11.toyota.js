@@ -442,15 +442,15 @@ $(function () {
 /* Show If (Condition multiple) */
   if (isIE11) {
     console.log("ie11");
-    lazyLoadScript("https://applidget.github.io/vx-assets/shared/js/show-if/2.0.0/legacy/show-if.js", "[data-show-if]", function() {
+    lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/show-if.legacy.js", "[data-show-if]", function() {
       $(document).find("[data-show-if]").each(function () {
-        ShowIf($(this));
+        new ShowIf($(this));
       });
       $(document).on('click', '.add-linked-guest', function () {
         $linkedGuest = $(this).prev('[id*=linked-person]');
 
         $linkedGuest.find('[data-show-if]').each(function () {
-          ShowIf($(this));
+          new ShowIf($(this));
         });
       });
     });
