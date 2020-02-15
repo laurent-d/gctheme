@@ -36,10 +36,6 @@
 
 
 $(function () {
-
-  //  Check if ie11
-  var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
-
   $('[data-section-type=map]').has('.map-section-container').each(function (index, container) {
     var $container = $(container);
     var id = $container.attr('data-section-id');
@@ -433,44 +429,25 @@ $(function () {
     e.preventDefault();
   });
 
-  if (isIE11) {
-    console.log("ie11 - xxxx");
-  } else {
-    console.log("not ie11 - xxxx");
-  }
-
 /* Show If (Condition multiple) */
   if (isIE11) {
-    console.log("ie11");
-    lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/show-if.legacy.js", "[data-show-if]", function() {
-      $(document).find("[data-show-if]").each(function () {
-        new ShowIf($(this));
-      });
-      $(document).on('click', '.add-linked-guest', function () {
-        $linkedGuest = $(this).prev('[id*=linked-person]');
-
-        $linkedGuest.find('[data-show-if]').each(function () {
-          new ShowIf($(this));
-        });
-      });
-    });
+    var showIfScriptUrl = "https://applidget.github.io/vx-assets/shared/js/show-if/2.0.0/legacy/show-if.js";
   } else {
-    console.log("not ie11");
-    lazyLoadScript("https://applidget.github.io/vx-assets/shared/js/show-if/2.0.0/show-if.js", "[data-show-if]", function() {
-      $(document).find("[data-show-if]").each(function () {
-        new ShowIf($(this));
-      });
-      $(document).on('click', '.add-linked-guest', function () {
-        $linkedGuest = $(this).prev('[id*=linked-person]');
-
-        $linkedGuest.find('[data-show-if]').each(function () {
-          new ShowIf($(this));
-        });
-      });
-    });
+    var showIfScriptUrl = "https://applidget.github.io/vx-assets/shared/js/show-if/2.0.0/show-if.js";
   }
 
+  lazyLoadScript(showIfScriptUrl, "[data-show-if]", function() {
+    $(document).find("[data-show-if]").each(function () {
+      new ShowIf($(this));
+    });
+    $(document).on('click', '.add-linked-guest', function () {
+      $linkedGuest = $(this).prev('[id*=linked-person]');
 
+      $linkedGuest.find('[data-show-if]').each(function () {
+        new ShowIf($(this));
+      });
+    });
+  });
 
   /* Multiples Value List */
   var multipickListScriptUrl = "https://applidget.github.io/vx-assets/templates/website/js/searchable-option-list.js?v=3";
@@ -533,6 +510,9 @@ $(function () {
 
   // Social Network Sharing
   lazyLoadScript("https://cdn.jsdelivr.net/npm/goodshare.js@6/goodshare.min.js", "[data-section-type='social-networks-sharing']");
+
+  //  Check if ie11
+  var isIE11 = (/trident/i).test(navigator.userAgent) && (/rv:/i).test(navigator.userAgent);
 
   // Sessions search
   if (isIE11) {
