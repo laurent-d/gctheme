@@ -37,6 +37,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       var val = charts[i].querySelector('data-chart').textContent;
       console.log(val);
       var textDisplay = charts[i].querySelector('.js-text');
+      console.log(textDisplay);
       if (NUMBER_TYPE == "graph") {
         console.log("graph");
         var chart = charts[i].querySelector('.js-circle');
