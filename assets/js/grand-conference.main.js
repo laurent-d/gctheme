@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       var self = this;
       this.interval = setInterval(function () {
         startTm += increment;
-        self.html.innerHTML = startTm + unit;
+        self.html.textContent = startTm + unit;
         if (startTm == endTm) {
           clearInterval(self.interval);
         }
@@ -135,7 +135,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     var NUMBER_TYPE = chartSection.dataset.chartsType;
     var charts = chartSection.querySelectorAll('.score');
     for (var i = 0; i < charts.length; i++) {
-      var val = charts[i].querySelector('data-chart').innerHTML;
+      var val = charts[i].querySelector('data-chart').textContent;
       var textDisplay = charts[i].querySelector('.js-text');
       if (NUMBER_TYPE == "graph") {
         var chart = charts[i].querySelector('.js-circle');
