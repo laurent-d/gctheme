@@ -8,6 +8,7 @@
  *
  * Minor modifications by Chris Price to only polyfill when required.
  */
+
 (function(SVGElement) {
   if (!SVGElement || 'innerHTML' in SVGElement.prototype) {
     return;
@@ -86,56 +87,77 @@
 })((1, eval)('this').SVGElement);
 
 
+/* GRAND CONFERENCE ADD-ON F(X) */
+
+if (SVGElement.prototype.contains === undefined) {
+  SVGElement.prototype.contains = function(el) {
+      return $.contains(this, el);
+  };
+}
+
+if (SVGElement.prototype.getElementsByClassName === undefined) {
+  SVGElement.prototype.getElementsByClassName = function(className) {
+      return this.querySelectorAll('.' + className);
+  };
+}
+
 window.addEventListener("DOMContentLoaded", function (event) {
 
   /* Charts-columns */
-  class getCounter {
-      constructor(startCount, endCount, timer, html) {
-          this.startCount = startCount;
-          this.endCount = endCount;
-          this.timer = (timer * 1000) / endCount;
-          this.html = html;
-      }
+  var getCounter = function () {
+    "use strict";
 
-      startCounter(inc, unit) {
-          let startTm = this.startCount,
-              endTm = this.endCount;
-          // if you want it to add a number just replace the -1 with +1
-          let increment = startTm < endTm ? inc : -1;
-          let self = this;
-          this.interval = setInterval(function () {
-              startTm += increment;
-              self.html.innerHTML = startTm + unit;
-              if (startTm == endTm) {
-                  clearInterval(self.interval);
-              }
-          }, this.timer);
-      }
-  }
+    function getCounter(startCount, endCount, timer, html) {
+      this.startCount = startCount;
+      this.endCount = endCount;
+      this.timer = timer * 1000 / endCount;
+      this.html = html;
+    }
 
-  var chartsreveal = function (chartSection) {
-      var NUMBER_TYPE = chartSection.dataset.chartsType;
-      const charts = chartSection.querySelectorAll('.score');
-      for (var i = 0; i < charts.length; i++) {
-          var val = charts[i].querySelector('data-chart').innerHTML;
-          var textDisplay = charts[i].querySelector('.js-text');
-          if (NUMBER_TYPE == "graph") {
-              var chart = charts[i].querySelector('.js-circle');
-              var radius = chart.getAttribute('r')
-              var diameter = Math.round(Math.PI * radius * 2)
-              var getOffset = (val = 0) => Math.round((100 - val) / 100 * diameter)
-              chart.style.strokeDashoffset = getOffset(val)
-              //textDisplay.textContent = `${val}%`
-              var unit = "%";
-              var inc = 1;
-          } else {
-              var inc = (val.length > 3) ? 10 : 1;
-              var unit = "";
+    var _proto = getCounter.prototype;
+
+    _proto.startCounter = function startCounter(inc, unit) {
+      var startTm = this.startCount, endTm = this.endCount;
+      var increment = startTm < endTm ? inc : -1;
+      var self = this;
+      this.interval = setInterval(function () {
+        startTm += increment;
+        self.html.innerHTML = startTm + unit;
+        if (startTm == endTm) {
+          clearInterval(self.interval);
+        }
+      }, this.timer);
+    };
+    return getCounter;
+  }();
+
+  var chartsreveal = function chartsreveal(chartSection) {
+    var NUMBER_TYPE = chartSection.dataset.chartsType;
+    var charts = chartSection.querySelectorAll('.score');
+    for (var i = 0; i < charts.length; i++) {
+      var val = charts[i].querySelector('data-chart').innerHTML;
+      var textDisplay = charts[i].querySelector('.js-text');
+      if (NUMBER_TYPE == "graph") {
+        var chart = charts[i].querySelector('.js-circle');
+        var radius = chart.getAttribute('r');
+        var diameter = Math.round(Math.PI * radius * 2);
+        var getOffset = function getOffset(val) {
+          if (val === void 0) {
+            val = 0;
           }
-          var counter = new getCounter(0, val, 1, textDisplay);
-          counter.startCounter(inc, unit);
+          return Math.round((100 - val) / 100 * diameter);
+        };
+        chart.style.strokeDashoffset = getOffset(val);
+        var unit = "%";
+        var inc = 1;
+      } else {
+        var inc = val.length > 3 ? 10 : 1;
+        var unit = "";
       }
-  }
+      var counter = new getCounter(0, val, 1, textDisplay);
+      counter.startCounter(inc, unit);
+    }
+  };
 
 
   lazyLoadScript("https://cdn.jsdelivr.net/npm/in-view@0.6.1/dist/in-view.min.js", "[data-section-type='charts-column']", function () {
@@ -156,7 +178,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     var cells = container.querySelectorAll(cellSelector);
     if (carousel && cells) {
       var cellsTotalWidth = 0;
-      cells.forEach(cell => {
+      cells.forEach(function (cell) {
         var style = window.getComputedStyle(cell);
         cellsTotalWidth +=
           parseFloat(style.width) +
@@ -199,8 +221,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 
-  lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css",".slideshow_enabled");
-  lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js",".slideshow_enabled",
+  lazyLoadStylesheet("https://unpkg.com/flickity@2/dist/flickity.min.css","[data-section-type='images-list']");
+  lazyLoadScript("https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js","[data-section-type='images-list']",
     function () {
       initFlkty();
       window.addEventListener("resize", function () {
@@ -215,82 +237,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* Slideshow */
 
   /* Synoptique */
-  lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/backdrop.css", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadStylesheet("https://unpkg.com/tippy.js@5/dist/tippy.css", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/themes/light.css", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadStylesheet("https://unpkg.com/tippy.js@5.0.1/animations/shift-away-subtle.css", "[data-section-type='sessions-list-synoptique']");
   lazyLoadScript("https://asvd.github.io/syncscroll/syncscroll.js", "[data-section-type='sessions-list-synoptique']");
-  lazyLoadScript("https://unpkg.com/popper.js@1", "[data-section-type='sessions-list-synoptique']", function () {
-    lazyLoadScript("https://unpkg.com/tippy.js@5", "[data-section-type='sessions-list-synoptique']", function () {
-      if ($('[data-section-type="sessions-list-synoptique"] .filter-container').length > 0) {
-        $(window).on('load resize', function () {
-          /* Enable fixed cart */
-          if ($(document).outerWidth() > 767) {
-            var top_cart = 0;
-            $('[data-section-type="sessions-list-synoptique"] .filter-container').affix({
-              offset: {
-                top: $('[data-section-type="sessions-list-synoptique"]').offset().top,
-                bottom: ($('footer').outerHeight(true) + 85)
-              }
-            });
-          } else {
-            $('[data-section-type="sessions-list-synoptique"] .filter-container').removeClass("affix");
-          }
-        });
-      }
-
-      /* Enhance scroll with disable hover on scroll */
-      var timer;
-      $(document).on('scroll', function () {
-        clearTimeout(timer);
-        if (!$('body').hasClass('disable-hover')) {
-          $('body').addClass('disable-hover')
-        }
-        timer = setTimeout(function() {
-          $('body').removeClass('disable-hover')
-        }, 500);
-      });
-
-      /* init to first date  and change the behavior of the checkbox dates */
-      var $checkedDates = $('[data-section-type="sessions-list-synoptique"] .search-filter input[type=radio][name^=dates]')
-      if (!$checkedDates.is(':checked')) {
-        $checkedDates.first().trigger('click');
-        $checkedDates.first().prop('checked', true);
-        $checkedDates.first().parent().addClass("active");
-      } else {
-        $checkedDates.filter(':checked').parent().addClass("active");
-      }
-
-      $(document).on('click', '.filter-button', function(e) {
-        $('.filter-container .panel').toggleClass('open');
-      });
-
-      tippy('[data-section-type="sessions-list-synoptique"] .session-item', {
-        popperOptions: {
-          positionFixed: true,
-          modifiers: {
-            computeStyle: { enabled: false, gpuAcceleration: false },
-            preventOverflow: { padding: 0 },
-          },
-        },
-        appendTo: document.body,
-        animation: 'shift-away-subtle',
-        theme: 'light',
-        trigger: 'click',
-        placement: 'top',
-        maxWidth: '100%',
-        zIndex: '99999999',
-        interactive: true,
-        arrow: false,
-        content(reference) {return document.getElementById(reference.getAttribute('data-template'));}
-      });
-
-      $(document).on('click', '.close_info', function(e) {
-        $(e.target).closest('.tippy-popper')[0]._tippy.hide();
-      });
-    });
-  });
-
   /* Synoptique */
 
   /* FAQ */
@@ -623,77 +570,84 @@ window.addEventListener("DOMContentLoaded", function (event) {
   /* REVSLIDER VIDEO */
 
   /* Session LIST Grand Conf*/
-  lazyLoadScript("https://laurent-d.github.io/gctheme/assets/js/jquery.masory.js","[data-section-type='sessions-list'] .grandconf",
-    function () {
-      (function () {
-        var originalAddClassMethod = $.fn.addClass;
-        var originalRemoveClassMethod = $.fn.removeClass;
-        $.fn.addClass = function () {
-          var result = originalAddClassMethod.apply(this, arguments);
-          $(this).trigger('classChanged');
-          return result;
-        }
-        $.fn.removeClass = function () {
-          var result = originalRemoveClassMethod.apply(this, arguments);
-          $(this).trigger('classChanged');
-          return result;
-        }
-      })();
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/grand-conference/js/jquery.masory.js","[data-section-type='sessions-list']", function () {
 
-      function debounce(callback, delay) {
-        var timer;
-        return function () {
-          var args = arguments;
-          var context = this;
-          clearTimeout(timer);
-          timer = setTimeout(function () {
-            callback.apply(context, args);
-          }, delay)
-        }
+    /* set grid */
+    var grid = $('.session-wrapper').masonry({
+      itemSelector: '.scheduleday_wrapper',
+      columnWidth: '.sizer',
+      gutter: 20
+    });
+
+    /* Check empty session on class changed */
+    $(".session-item").bind('classChanged', debounce(sessionlistEmptyCheck, 100, false));
+
+    /* Expand div for description */
+    $('li .session_content_wrapper.expandable').on('click', function (e) {
+      var targetID = $(this).attr('data-expandid');
+      $('#' + targetID).toggleClass('hide');
+      $(this).toggleClass('active');
+      grid.masonry();
+    });
+
+    /* Add active class if checked for filters*/
+    $(".filter-container .checkbox").each(function () {
+      if ($(this).find('input:checked').length > 0) {
+        $(this).addClass("active");
+      } else {
+        $(this).show();
       }
+    });
 
-      var grid = $('.session-wrapper').masonry({
-        itemSelector: '.scheduleday_wrapper',
-        columnWidth: '.sizer',
-        gutter: 20
-      });
+    /* Avoid propagation on register unregister */
+    $("li .session_content_wrapper.expandable a").on('click', function (e) {
+      e.stopPropagation();
+      grid.masonry();
+    });
 
-      $(".session-item").bind('classChanged', debounce(function (e) {
-        $(".scheduleday_wrapper").each(function () {
-          if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
-            $(this).hide();
-          } else {
-            $(this).show();
-          }
-        });
-        grid.masonry();
-      }, 100));
+    /* init */
+    sessionlistEmptyCheck();
+    $('.session-container').toggleClass("ready");
 
-      $('li .session_content_wrapper.expandable').on('click', function (e) {
-        var targetID = $(this).attr('data-expandid');
-        $('#' + targetID).toggleClass('hide');
-        $(this).toggleClass('active');
-        grid.masonry();
-      });
+    /* Extend addClass and removeClass (jQuery) to have a ClassChanged trigger */
+    var originalAddClassMethod = $.fn.addClass;
+    var originalRemoveClassMethod = $.fn.removeClass;
+    $.fn.addClass = function () {
+      var result = originalAddClassMethod.apply(this, arguments);
+      $(this).trigger('classChanged');
+      return result;
+    }
+    $.fn.removeClass = function () {
+      var result = originalRemoveClassMethod.apply(this, arguments);
+      $(this).trigger('classChanged');
+      return result;
+    }
 
-      $(".filter-container .checkbox").each(function () {
-        if ($(this).find('input:checked').length > 0) {
-          $(this).addClass("active");
+    /* Debounce function to avoid multiple call need to be scoped */
+    function debounce(callback, delay) {
+      var timer;
+      return function () {
+        var args = arguments;
+        var context = this;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          callback.apply(context, args);
+        }, delay)
+      }
+    }
+
+    function sessionlistEmptyCheck() {
+      $(".scheduleday_wrapper").each(function () {
+        if ($(this).find('.session-item').length == $(this).find('.session-item.hide').length) {
+          $(this).hide();
         } else {
           $(this).show();
         }
       });
+      grid.masonry();
+    }
 
-      $(".accesspoint-register, .accesspoint-unregister").click(function (e) {
-        e.stopPropagation();
-        grid.masonry();
-      });
-
-      $(window).load(function () {
-        grid.masonry();
-        $('.session-container').toggleClass("ready");
-      });
-    });
+  });
   /* Session LIST Grand Conf*/
 
 });
