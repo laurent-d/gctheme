@@ -57,6 +57,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         var unit = "";
         var inc = 1;
       } else {
+        console.log("nograph");
         var inc = val.length > 3 ? 10 : 1;
         var unit = "";
       }
