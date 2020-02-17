@@ -50,6 +50,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
           }
           return Math.round((100 - val) / 100 * diameter);
         };
+        console.log(val);
         console.log(Math.round((100 - val) / 100 * diameter));
         chart.style.strokeDashoffset = Math.round((100 - val) / 100 * diameter);
         var unit = "";
