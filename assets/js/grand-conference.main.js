@@ -34,10 +34,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
     var NUMBER_TYPE = chartSection.dataset.chartsType;
     var charts = chartSection.querySelectorAll('.score');
     for (var i = 0; i < charts.length; i++) {
-      var val = charts[i].querySelector('data-chart').textContent;
+      var val = charts[i].querySelector('data-chart').innerHTML;
       console.log(val);
       var textDisplay = charts[i].querySelector('.js-text');
-      console.log(textDisplay);
       if (NUMBER_TYPE == "graph") {
         console.log("graph");
         var chart = charts[i].querySelector('.js-circle');
@@ -58,7 +57,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         var unit = "";
         var inc = 1;
       } else {
-        console.log("nograph");
+        console.log("graph");
         var inc = val.length > 3 ? 10 : 1;
         var unit = "";
       }
