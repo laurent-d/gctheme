@@ -96,7 +96,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       this.startCount = startCount;
       this.endCount = endCount;
       this.timer = timer * 1000 / endCount;
-      this.textContent = textContent;
+      this.html = html;
     }
 
     var _proto = getCounter.prototype;
@@ -120,9 +120,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
     var NUMBER_TYPE = chartSection.dataset.chartsType;
     var charts = chartSection.querySelectorAll('.score');
     for (var i = 0; i < charts.length; i++) {
-      var val = charts[i].querySelector('data-chart').textContent;
+      var val = charts[i].querySelector('data-chart');
       console.log(val);
-      var textDisplay = charts[i].querySelector('.js-text').textContent;
+      var textDisplay = charts[i].querySelector('.js-text');
       console.log(chart);
       if (NUMBER_TYPE == "graph") {
         console.log("graph");
