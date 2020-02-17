@@ -50,8 +50,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
           }
           return Math.round((100 - val) / 100 * diameter);
         };
-        console.log(getOffset(val));
-        chart.style.strokeDashoffset = getOffset(val);
+        console.log(Math.round((100 - val) / 100 * diameter));
+        chart.style.strokeDashoffset = Math.round((100 - val) / 100 * diameter);
         var unit = "";
         var inc = 1;
       } else {
