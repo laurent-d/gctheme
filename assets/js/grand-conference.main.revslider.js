@@ -551,4 +551,59 @@ window.addEventListener("DOMContentLoaded", function (event) {
   });
   /* Session LIST Grand Conf*/
 
+  /* Image overlay */
+
+  $("[data-section-type='image-with-overlay']").each(function () {
+    console.log(Bip);
+  });
+
+  setREVStartSize({
+    c: jQuery('#rev_slider_{{ section.id }}'),
+    gridwidth: [1240],
+    gridheight: [800],
+    sliderLayout: 'fullwidth'
+  });
+
+  var revapi1, tpj = jQuery;
+  tpj(document).ready(function () {
+    if (tpj("#rev_slider_{{ section.id }}").revolution == undefined) {
+      revslider_showDoubleJqueryError("#rev_slider_{{ section.id }}");
+    } else {
+      revapi1 = tpj("#rev_slider_{{ section.id }}").show().revolution({
+        sliderType: "hero",
+        jsFileLocation: "https://applidget.github.io/vx-assets/templates/website/grand-conference/js/revslider/",
+        sliderLayout: "{{ js_settings }}",
+        dottedOverlay: "none",
+        delay: 9000,
+        navigation: {
+          onHoverStop: "off",
+        },
+        visibilityLevels: [1240, 1024, 778, 480],
+        gridwidth: 1240,
+        gridheight: 800,
+        lazyType: "none",
+        shadow: 0,
+        spinner: "spinner3",
+        stopLoop: "off",
+        stopAfterLoops: -1,
+        stopAtSlide: -1,
+        shuffle: "off",
+        //autoHeight: "on",
+        disableProgressBar: "on",
+        hideThumbsOnMobile: "off",
+        hideSliderAtLimit: 0,
+        hideCaptionAtLimit: 0,
+        hideAllCaptionAtLilmit: 0,
+        debugMode: false,
+        fallbacks: {
+          simplifyAll: "off",
+          nextSlideOnWindowFocus: "off",
+          disableFocusListener: false,
+        }
+      });
+    }
+
+  });
+  /* Image overlay */
+
 });
