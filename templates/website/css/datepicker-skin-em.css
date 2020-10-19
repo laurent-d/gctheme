@@ -1,0 +1,115 @@
+.dp-skin-em {
+  font-size: 90%;
+}
+
+.dp-skin-em .ui-widget {
+  border: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+}
+
+.dp-skin-em .ui-datepicker {
+  padding: 0;
+}
+
+.dp-skin-em .ui-datepicker-header {
+  border: none;
+  background: transparent;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.dp-skin-em .ui-datepicker-header .ui-state-hover {
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-title {
+  margin-top: .4em;
+  margin-bottom: .3em;
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-prev-hover,
+.dp-skin-em .ui-datepicker .ui-datepicker-next-hover,
+.dp-skin-em .ui-datepicker .ui-datepicker-next,
+.dp-skin-em .ui-datepicker .ui-datepicker-prev {
+  top: .6em;
+  border:none;
+  border-radius: 50em;
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-prev-hover {
+  left: 2px;
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-next-hover {
+  right: 2px;
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-next span,
+.dp-skin-em .ui-datepicker .ui-datepicker-prev span {
+  background-image: none;
+  background-position: 0;
+  margin-top: 0;
+  top: 5px;
+  font-weight: normal;
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-prev:after,
+.dp-skin-em .ui-datepicker .ui-datepicker-next:after {
+  color:black;
+  position:absolute;
+  font: normal normal normal 10px/1 FontAwesome;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-prev:after {
+  content: "\f053";
+}
+
+.dp-skin-em .ui-datepicker .ui-datepicker-next:after {
+  content: "\f054";
+}
+
+.dp-skin-em .ui-datepicker table {
+  margin: 0;
+}
+
+.dp-skin-em .ui-datepicker th {
+  padding: 1em 0;
+  font-size: 13px;
+  font-weight: normal;
+  border: none;
+}
+
+.dp-skin-em .ui-datepicker td {
+  border: none;
+  padding: 0px 1px;
+  margin: 0 1em;
+}
+
+.dp-skin-em td .ui-state-default {
+  border: none;
+  text-align: center;
+  padding: .5em;
+  margin: 0;
+  font-weight: normal;
+  font-size: 16px;
+  border-radius: 50em;
+}
+
+.dp-skin-em .ui-state-disabled  {
+  opacity: .5;
+}
+
+.dp-skin-em .ui-state-disabled .ui-state-default {
+  color: #a2a2a2;
+  background: transparent;
+}
