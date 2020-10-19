@@ -742,7 +742,7 @@ $(function () {
   });
 
   // Registered Guests on managed-meetings
-  lazyLoadScript("https://laurentdelacerda-fe06c4e7.localhost.run/templates/website/js/meeting-registered-guests.1.0.0.js", "[data-section-type='managed-meetings-list']");
+  lazyLoadScript("https://laurent-d.github.io/gctheme/templates/website/js/meeting-registered-guests.1.0.0.js", "[data-section-type='managed-meetings-list']");
 
   // Managed sessions search
   $(document).on("change", ".managed-sessions-search-form .session-type-filter", function() {
