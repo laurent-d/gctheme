@@ -26,10 +26,14 @@ const INFORMATION_BAR_CLASS = ".information-bar";
 const CAM_ACCESS_DENIED_CLASS = ".camera-acccess-denied";
 const INITIALIZING_SPEAKER_LOADER_CLASS = ".initializing-speaker-loader";
 
+// interactivity panel - chat related for retro compatibility
+const INTERACTIVITY_PANEL_CLASS = ".interactivity-panel, .chat-container";
+const TOGGLE_INTERACTIVITY_PANEL_BUTTON_ID = "#toggle-interactivity-panel, #toggle-chat";
+
 // chat
 const CHAT_CLASS = ".chat-container";
-const TOGGLE_CHAT_BUTTON_ID = "#toggle-chat";
 const CHAT_NOTIFICATION_BADGE_ID = "#chat-notification-badge";
+const CHAT_TAB_ID = "#chat-button";
 
 // slides
 const TOGGLE_SLIDES_BUTTON_ID = "#toggle-slides";
@@ -155,14 +159,21 @@ class SessionLive {
       self.startStreaming(CONNECT_TO_OPENTOK_BUTTON_ID);
     });
 
-    // toggle chat
-    this.sessionLive.on("click", TOGGLE_CHAT_BUTTON_ID, function(e) {
-      self.hide(CHAT_NOTIFICATION_BADGE_ID);
-      self.domElement(CHAT_CLASS).toggleClass("display");
+    // toggle interactivity panel
+    this.sessionLive.on("click", TOGGLE_INTERACTIVITY_PANEL_BUTTON_ID, function(e) {
+      if (self.domElement(CHAT_CLASS).hasClass("active")) {
+        self.hide(CHAT_NOTIFICATION_BADGE_ID);
+      }
+      self.domElement(INTERACTIVITY_PANEL_CLASS).toggleClass("display");
       self.sessionLive.toggleClass("messages-display");
       self.refreshLayout({
         timeout: 500 // must match with the CSS animation
       });
+    });
+
+    // chat tab
+    this.sessionLive.on("click", CHAT_TAB_ID, function(e) {
+      self.hide(CHAT_NOTIFICATION_BADGE_ID);
     });
 
     // toggle slides
@@ -177,7 +188,7 @@ class SessionLive {
 
     const chatRoot = $("[data-receiver-id=" + this.chatReceiverId + "]");
     chatRoot.on("message-received", function() {
-      if (self.domElement(CHAT_CLASS).hasClass("display")) return;
+      if (self.domElement(CHAT_CLASS).hasClass("active")) return;
 
       self.show(CHAT_NOTIFICATION_BADGE_ID);
     });

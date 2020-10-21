@@ -388,12 +388,12 @@ $(function () {
   });
 
   // TIME RANGE SLIDER
-  if ($("#slider-range").length > 0) {
-    var defaultStartTime = $("#slider-range").data('default-start-time');
-    var defaultEndTime = $("#slider-range").data('default-end-time');
-    var locale = $("#slider-range").data('locale');
-    var startTime = $('[name=start_time]').val();
-    var endTime = $('[name=end_time]').val();
+  $("#slider-range, .slider-range").each(function() {
+    var defaultStartTime = $(this).data('default-start-time');
+    var defaultEndTime = $(this).data('default-end-time');
+    var locale = $(this).data('locale');
+    var startTime = $(this).siblings('[name=start_time]').val() || 0;
+    var endTime = $(this).siblings('[name=end_time]').val() || 1440;
 
     var displayTime = function (number, $selector, locale) {
       var hours = Math.floor(number / 60);
@@ -418,7 +418,7 @@ $(function () {
       $selector.html(hours + ':' + minutes);
     }
 
-    $("#slider-range").slider({
+    $(this).slider({
       range: true,
       min: Math.floor(defaultStartTime),
       max: Math.floor(defaultEndTime),
@@ -432,11 +432,11 @@ $(function () {
         displayTime(ui.values[0], $('.slider-time-start'), locale);
         displayTime(ui.values[1], $('.slider-time-end'), locale);
 
-        $('[name=start_time]').val(ui.values[0]).trigger("change");
-        $('[name=end_time]').val(ui.values[1]).trigger("change");
+        $(this).siblings('[name=start_time]').val(ui.values[0]).trigger("change");
+        $(this).siblings('[name=end_time]').val(ui.values[1]).trigger("change");
       }
     });
-  }
+  });
 
   // Collapsable elements - Display of caret for triggered button
   $('[id^=collapse-]').on('show.bs.collapse', function () {
@@ -608,7 +608,7 @@ $(function () {
   }
 
   // SESSION LIVE
-  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/session-live.1.0.0.js", "[data-section-type='session-live']", function() {
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/session-live.1.0.0.js?v=1", "[data-section-type='session-live']", function() {
     $("[data-section-type='session-live']").each(function() {
       const $sectionSessionLive = $(this);
       const isLive = $sectionSessionLive.attr('data-session-is-live');
@@ -742,7 +742,7 @@ $(function () {
   });
 
   // Registered Guests on managed-meetings
-  lazyLoadScript("https://laurent-d.github.io/gctheme/templates/website/js/meeting-registered-guests.1.0.0.js", "[data-section-type='managed-meetings-list']");
+  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/meeting-registered-guests.1.0.0.js", "[data-section-type='managed-meetings-list']");
 
   // Managed sessions search
   $(document).on("change", ".managed-sessions-search-form .session-type-filter", function() {

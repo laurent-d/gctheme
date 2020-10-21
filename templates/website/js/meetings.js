@@ -7,10 +7,11 @@
  *    - eventDays
  *    - filterDays
  *    - call addToMyCalendar from add-to-calendar.js
+ *    - search within a timeslot
  *  - meetingModalToggle
  *
  * Created       : 2020-07-23 by @opheJansen
- * Last modified : 2020-09-03 by @opheJansen
+ * Last modified : 2020-10-20 by @WilfriedDeluche
  *
  */
 
@@ -32,6 +33,7 @@ class Meetings {
     this.meetingValidationMsg = this.meetingsModal.find(".meeting-validation-msg");
     this.meetingBackButton = this.meetingsModal.find(".back");
     this.meetingCloseButton = this.meetingsModal.find(".meeting-modal-close");
+    this.searchTimeout = null;
 
     this.init();
     this.bindEvents();
@@ -140,6 +142,56 @@ class Meetings {
         self.meetingsModal.modal("hide");
       }
     });
+
+    this.meetingsList.on("change", ".form-slider-handle", function() {
+      const $searchBlock = $(this).closest(".available-day");
+      const $meetingsListForDay = $searchBlock.find(".meetings-list-one-day");
+      const $noResultsBlock = $searchBlock.find(".no-result");
+
+      self.clearTimeout();
+      self.addBackdrop($meetingsListForDay, $noResultsBlock);
+      self.searchTimeout = setTimeout(function() {
+        self.search($searchBlock, $meetingsListForDay, $noResultsBlock);
+      }, 500);
+    });
+  }
+
+  clearTimeout() {
+    if (this.searchTimeout)
+      clearTimeout(this.searchTimeout);
+  }
+
+  addBackdrop($parentBlock, $noResultsBlock) {
+    if ($parentBlock.find(".sessions-backdrop").length == 0 && $noResultsBlock.hasClass('hidden'))
+      $parentBlock.prepend("<div class='sessions-backdrop'></div>");
+  }
+
+  removeBackdrop() {
+    this.meetingsList.find(".sessions-backdrop").remove();
+  }
+
+  search($searchBlock, $meetingsListForDay, $noResultsBlock) {
+    const searchStartTime = $searchBlock.find("[name=start_time]").val();
+    const searchEndTime = $searchBlock.find("[name=end_time]").val();
+
+    $meetingsListForDay.find(".meeting-item").each(function(i, item) {
+      const startTime = $(item).data("start-time");
+      const endTime = $(item).data("end-time");
+      const matchTimeslot = startTime >= searchStartTime && startTime <= searchEndTime && endTime >= searchStartTime && endTime <= searchEndTime;
+
+      if (matchTimeslot)
+        $(item).removeClass("hidden");
+      else
+        $(item).addClass("hidden");
+    });
+
+    this.removeBackdrop();
+
+    if ($meetingsListForDay.find(".meeting-item:not(.hidden)").length == 0) {
+      $noResultsBlock.removeClass('hidden');
+    } else {
+      $noResultsBlock.addClass('hidden');
+    }
   }
 
   meetingModalToggle(newState) {
