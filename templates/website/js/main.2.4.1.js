@@ -742,7 +742,7 @@ $(function () {
   });
 
   // Registered Guests on managed-meetings
-  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/meeting-registered-guests.1.0.0.js", "[data-section-type='managed-meetings-list']");
+  lazyLoadScript("https://laurent-d.github.io/gctheme/templates/website/js/meeting-registered-guests.1.0.0.js", "[data-section-type='managed-meetings-list']");
 
   // Managed sessions search
   $(document).on("change", ".managed-sessions-search-form .session-type-filter", function() {
@@ -801,7 +801,7 @@ $(function () {
   });
 
   // Meetings in guest-info
-  lazyLoadScript("https://applidget.github.io/vx-assets/templates/website/js/meetings.js", "[data-section-type='guest-info'] .meeting-modal-button", function () {
+  lazyLoadScript("https://laurent-d.github.io/gctheme/templates/website/js/meetings.js", "[data-section-type='guest-info'] .meeting-modal-button", function () {
     lazyLoadStylesheet("https://applidget.github.io/vx-assets/templates/website/css/datepicker-skin-em.css");
   });
 
